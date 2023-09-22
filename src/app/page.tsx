@@ -3,15 +3,9 @@ import React, { useState, useEffect } from 'react';
 import Main from './components/Main';
 import { auth } from '@/service/firebase';
 import Login from '@/service/login';
-//import { Footer } from './components/Styles';
-//import LoadingScreen from './components/LoadingScreen';
+import { User } from "./types/types";
 
-interface User {
-  id:string,
-  name:string,
-  email:string,
-  friends:string[]
-}
+
 
 export default function Home(): JSX.Element {
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
@@ -36,11 +30,9 @@ export default function Home(): JSX.Element {
     return () => unsubscribe();
   }, []);
   
-  console.log(user)
-
   return (
     <>
-      {loggedIn ? <Main user={user} /> : <Login />}
+      {loggedIn ? <Main user={user as User} /> : <Login />}
       <footer>(c) 2023 BenRodProd</footer>
     </>
   );
