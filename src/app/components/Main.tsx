@@ -30,12 +30,18 @@ useEffect(() => {
   }
 },[userRooms, user.email])
 
+useEffect(() => {
+  if (userAvatar) {
+    writeToFirestore(user.email, "avatar", userAvatar);
+  }
+},[userAvatar, user.email])
+
 
 useEffect(() => {
   
   getUserInfos(user.email)
   .then((data) => {
-
+console.log(data)
     if (data && data.nick) {
       setUserNick(data.nick)
     }
@@ -45,6 +51,10 @@ useEffect(() => {
     if (data && data.rooms) {
       setUserRooms(data.rooms)
     }
+    if (data && data.avatar) {
+      setUserRooms(data.avatar)
+    }
+
   })
 },[user])
 
@@ -68,7 +78,7 @@ console.log("user", user.email, "nichname", userNick, "friends", userFriends)
   return (
     <>
     <button type="button" onClick = {()=>setSettings(prev => !prev)} >Settings</button>
-     {settings && <Settings friends={userFriends} rooms={userRooms} user={user} setRooms={setUserRooms} setFriends={setUserFriends} />}
+     {settings && <Settings avatar={userAvatar} setAvatar={setUserAvatar} friends={userFriends} rooms={userRooms} user={user} setRooms={setUserRooms} setFriends={setUserFriends} />}
       <FriendList friends={userFriends}/>
       <RoomList rooms={userRooms}/>
     </>
