@@ -4,6 +4,7 @@ import Main from './components/Main';
 import { auth } from '@/service/firebase';
 import Login from '@/service/login';
 import { User } from "./types/types";
+import { Settings } from './components/Settings';
 
 
 
@@ -32,7 +33,9 @@ export default function Home(): JSX.Element {
   
   return (
     <>
+    
       {loggedIn ? <Main user={user as User} /> : <Login />}
+     
       <footer>(c) 2023 BenRodProd</footer>
     </>
   );
