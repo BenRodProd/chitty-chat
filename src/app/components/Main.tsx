@@ -9,13 +9,14 @@ import CreateRoom from './CreateRoom';
 import RoomList from './RoomList';
 import { Settings } from './Settings';
 import writeToFirestore from '@/service/writeUserInfo';
+import ChooseAvatar from './ChooseAvatar';
 
 export default function Main({ user }: { user: User}  ): JSX.Element {
   const [userNick, setUserNick] = useState<string>();
   const [userFriends, setUserFriends] = useState<string[]>();
 const [userRooms, setUserRooms] = useState<string[]>();
   const [settings, setSettings] = useState<boolean>(false);
-
+const [userAvatar, setUserAvatar] = useState<string>();
   useEffect(() => {
     if (userFriends) {
       writeToFirestore(user.email, "friends", userFriends);
@@ -58,7 +59,9 @@ if (!userFriends) return (
 if (!userRooms) return (
   <CreateRoom user={user} setRooms={setUserRooms} rooms={userRooms}/>
 )
-
+if (!userAvatar) return (
+  <ChooseAvatar avatar={userAvatar} setAvatar={setUserAvatar}/>
+)
 
 console.log("user", user.email, "nichname", userNick, "friends", userFriends)
 

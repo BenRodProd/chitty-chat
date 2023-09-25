@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 export default function FriendList({ friends }: { friends: string[] | null }): JSX.Element {
   const [friendNicknames, setFriendNicknames] = useState<string[]>([]);
-
+console.log(friends)
   useEffect(() => {
     if (friends && friends.length > 0) {
       const fetchFriendNicknames = async () => {
