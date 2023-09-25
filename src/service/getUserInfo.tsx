@@ -12,8 +12,8 @@ async function getUserInfos(userEmail : string) {
       const nick = userData.nick;
       const friends = userData.friends; 
       const rooms = userData.rooms;
-      
-      return { nick, friends, rooms }; // Return an object with both city and style properties
+      const avatar= userData.avatar;
+      return { nick, friends, rooms, avatar };
     } else {
       return null; // Return null if the user's document is not found
     }
