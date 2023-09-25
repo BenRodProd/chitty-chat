@@ -1,10 +1,10 @@
 import saveToDatabase from '@/service/writeUserInfo';
 
 export default function Introduction({userEmail, userName, setNickName} : {userEmail: string, userName: string, setNickName: any}): JSX.Element {
-    console.log("intro", userEmail, userName)
+  
     function handleNewNickName(e: any, userEmail: string, userName: string) {
         e.preventDefault();
-        console.log(e.target.nickname.value)
+      
         setNickName(e.target.nickname.value)
         saveToDatabase(userEmail, "nick", e.target.nickname.value)
     }

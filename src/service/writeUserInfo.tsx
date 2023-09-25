@@ -11,10 +11,10 @@ export default async function writeToFirestore(username : string, typeOfData: st
 
     if (docSnapshot.exists()) {
       // Document exists, update the city
-      await updateDoc(userDocRef, { typeOfData: dataToWrite });
+      await updateDoc(userDocRef, { [typeOfData]: dataToWrite });
     } else {
       // Document doesn't exist, create a new one
-      await setDoc(userDocRef, { typeOfData: dataToWrite });
+      await setDoc(userDocRef, { [typeOfData]: dataToWrite });
     }
   } catch (error) {
     console.error(error);
