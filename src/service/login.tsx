@@ -7,7 +7,7 @@ const StyledLogin = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 100vh;
+  height: 100dvh;
   width: 100%;
   background-color: antiquewhite;
   text-align: center;

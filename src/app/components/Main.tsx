@@ -65,7 +65,7 @@ display:flex;
 flex-direction: column;
 position:relative;
 width: 100vw;
-height:100vh;
+height:100dvh;
 overflow: hidden;
 
 `

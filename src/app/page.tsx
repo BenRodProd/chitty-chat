@@ -9,7 +9,7 @@ import styled from 'styled-components';
 const MainDiv = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100dvh;
   width: 100vw;
   overflow: hidden;
   z-index:-12;
