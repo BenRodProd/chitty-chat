@@ -6,7 +6,7 @@ import { onSnapshot, query, collection, orderBy, limit, where, QueryDocumentSnap
 import { firestore } from '@/service/firebase';
 import styled from "styled-components";
 
-const ChatBubble = styled.div`
+const ChatBubble = styled.div<{ $isCurrentUser: string }>`
   display: flex;
   position:relative;
   width: 50%;
