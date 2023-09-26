@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 
-export default function ChooseAvatar({ avatar, setAvatar }: { avatar: string; setAvatar: any }): JSX.Element {
+export default function ChooseAvatar({ avatar, setAvatar, handleChangeAvatar }: { handleChangeAvatar: any, avatar: string; setAvatar: any }): JSX.Element {
   // Array of avatar image file names
   const avatarImages = Array.from({ length: 51 }, (_, i) => `/assets/avartar${i}.jpg`);
 
@@ -38,11 +38,16 @@ export default function ChooseAvatar({ avatar, setAvatar }: { avatar: string; se
     
   };
 
+function handleChooseAvatar() {
+  setAvatar(shuffledAvatarImages[currentAvatarIndex]);
+  handleChangeAvatar(false)
+}
+
   return (
     <>
       <div>
         <button onClick={handlePreviousAvatar}>&lt;--</button>
-        <Image width={200} height={200} src={shuffledAvatarImages[currentAvatarIndex]} onClick={()=>setAvatar(shuffledAvatarImages[currentAvatarIndex])} alt="Avatar" />
+        <Image width={200} height={200} src={shuffledAvatarImages[currentAvatarIndex]} onClick={()=>handleChooseAvatar()} alt="Avatar" />
         <button onClick={handleNextAvatar}>--&gt;</button>
       </div>
     </>

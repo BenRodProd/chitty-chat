@@ -16,7 +16,7 @@ const ChatBubble = styled.div`
   z-index: 1;
   margin-bottom: 1rem;
   padding:0.5rem;
-  
+  border-radius: 12px;
 `
 
 const DisplayTime = styled.div`
@@ -33,7 +33,7 @@ const ChatRoomStyle = styled.div`
   flex-direction: column;
   background-color: lightblue;
   border: 3px black solid;
-  padding: 1rem;
+  padding: 0.5rem;
   height: 100%;
   z-index: 0;
 `
@@ -41,16 +41,26 @@ const ChatRoomStyle = styled.div`
 const MessageBox = styled.div`
   display: flex;
   flex-direction: column;
-  height: 60%;
+  overflow-x: hidden;
   overflow-y: scroll;
   z-index: 2;
+  @media screen and (max-width: 600px) {
+    height: 55%;
+  }
+  @media screen and (min-width: 600px) {
+    height: 80%;
+  }
+
 `
 
 const RoomHeader = styled.p`
-  font-size: 3rem;
+  font-size: 2rem;
   text-align: center;
   font-weight: bold;
   letter-spacing: 0.5rem;
+  border: 3px black solid;
+  border-radius: 12px;
+  background-color: l
 `
 
 export default function ShowRoom({ userNick, userAvatar, activeRoom, user }: { userNick: string, userAvatar: string, activeRoom: string, user: any }) {
@@ -86,7 +96,7 @@ export default function ShowRoom({ userNick, userAvatar, activeRoom, user }: { u
       unsubscribe();
     };
   }, [activeRoom, user]);
-  const formatTimestamp = (timestamp) => {
+  const formatTimestamp = (timestamp: any) => {
     if(timestamp) {
     const date = timestamp.toDate(); // Convert Firebase timestamp to JavaScript Date
     const options = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };

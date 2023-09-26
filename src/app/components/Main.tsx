@@ -16,13 +16,56 @@ import styled from 'styled-components';
 
 const ProfileSection = styled.div`
 display: flex;
+
 flex-direction: column;
 align-items: center;
 justify-content: center;
-width: 20%;
+width: 100%;
+height:20%;
 align-self: flex-end;
-  border: 3px solid black;
+background-color: aliceblue;
+
   text-align: center;
+z-index:1;
+
+`
+
+const SettingsButton = styled.button`
+
+display:flex;
+position:absolute;
+left:1px;
+top:1px;
+background-color: #4CAF50;
+border: none;
+color: white;
+padding: 15px 32px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+margin: 4px 2px;
+cursor: pointer;
+border-radius: 12px;
+z-index:14;
+`
+const ProfileLists = styled.div`
+display: flex;
+justify-content: center;
+width:100%;
+padding:12px;
+background-color: lightblue;
+border: 3px black solid;
+border-radius: 12px;
+`
+
+const MainDiv = styled.div`
+display:flex;
+flex-direction: column;
+position:relative;
+width: 100vw;
+height:100vh;
+overflow: hidden;
 
 `
 
@@ -92,17 +135,20 @@ if (!userAvatar) return (
 console.log("user", user.email, "nichname", userNick, "friends", userFriends)
 
   return (
-    <>
-    <button type="button" onClick = {()=>setSettings(prev => !prev)} >Settings</button>
-     {settings && <Settings avatar={userAvatar} setAvatar={setUserAvatar} friends={userFriends} rooms={userRooms} user={user} setRooms={setUserRooms} setFriends={setUserFriends} />}
+      <MainDiv>
+    <SettingsButton type="button" onClick = {()=>setSettings(prev => !prev)}><Image src="/settings.png" alt="settings" width={20} height={20}/></SettingsButton>
+     {settings && <Settings setSettings={setSettings} avatar={userAvatar} setAvatar={setUserAvatar} friends={userFriends} rooms={userRooms} user={user} setRooms={setUserRooms} setFriends={setUserFriends} />}
       <ProfileSection>
-      <Image src={userAvatar} alt="avatar" width={100} height={100}/>
+     
+      <ProfileLists>
       <FriendList friends={userFriends}/>
       <RoomList rooms={userRooms} setActiveRoom={setActiveRoom}/>
+      </ProfileLists>
       </ProfileSection>
       {activeRoom && <ShowRoom userNick={userNick} userAvatar={userAvatar} user={user} activeRoom={activeRoom}/>}
       
-    </>
+    </MainDiv>
+
   );
 
 }

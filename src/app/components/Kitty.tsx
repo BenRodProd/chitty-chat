@@ -21,7 +21,7 @@ const Kitty = ({animationCall}:{animationCall:string}) => {
   return (
     <CanvasPlacement>
     <Canvas style={{ width: '100%', height: '100%' }}>
-      <OrbitControls />
+     
         
         <ambientLight intensity={0.5} />
         <directionalLight intensity={0.8} position={[5, 5, 5]} />

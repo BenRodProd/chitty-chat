@@ -1,6 +1,28 @@
 import { useEffect, useState } from "react";
 import getAllUserNicknames from "@/service/getAllUsers";
 import writeToFirestore from "@/service/writeUserInfo";
+import styled from "styled-components";
+
+const FriendsDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: lightblue;
+  border: 3px black solid;
+  padding: 1rem;
+  border-radius: 12px;
+  z-index: 0;
+  gap:1rem;
+`
+
+const FriendSelector = styled.p`
+cursor: pointer;
+border: 3px black solid;
+border-radius: 12px;
+padding: 0.5rem;
+background-color: lightgreen;
+`
 
 export default function FindFriends({
   userEmail,
@@ -20,7 +42,10 @@ export default function FindFriends({
   }, []);
 
   function handleAddFriend(user: any) {
-    if (!friends.includes(user.email)) {
+    if(!friends) {
+      setFriends([user.email])
+      writeToFirestore(userEmail, "friends", [user.email]);
+    } else if (!friends.includes(user.email)) {
       // Ensure friends is an array
       const updatedFriends =
         Array.isArray(friends) && friends.length > 0
@@ -28,21 +53,22 @@ export default function FindFriends({
           : [user.email];
 
       setFriends(updatedFriends);
-
+      console.log(updatedFriends)
       // Optionally, you can also update the database here if needed
       writeToFirestore(userEmail, "friends", updatedFriends);
     }
+  
   }
 
   return (
-    <div>
-      <h2>Hallo {userEmail}, you have no one in your friendlist.</h2>
+    <FriendsDiv>
+      <h2>Add a friend to your friendlist.</h2>
       <p>Choose someone to connect with:</p>
       {allUsers.map((user, index) => (
-        <p onClick={() => handleAddFriend(user)} key={index}>
+        <FriendSelector onClick={() => handleAddFriend(user)} key={index}>
           {user.nick}
-        </p>
+        </FriendSelector>
       ))}
-    </div>
+    </FriendsDiv>
   );
 }

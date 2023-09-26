@@ -19,7 +19,7 @@ const StyledFooter = styled.footer`
   display: flex;
   text-align: center;
   justify-content: center;
-  
+  z-index: -5;
   position: absolute;
   bottom:0;
   width: 100%;

@@ -4,14 +4,17 @@ import styled from "styled-components";
 
 const StyledInput = styled.input`
 display:flex;
+
     height:5rem;
     width: 50%;
     background-color: rgba(255,255,255,0.7);
     margin: 0 1rem;
     z-index:12;
+
 `
 const StyledForm = styled.form`
     display:flex;
+    position:absolute;
     justify-self: center;
     justify-content: center;
     align-items: center;
@@ -20,7 +23,8 @@ const StyledForm = styled.form`
     align-self: center;
     margin: 1rem;
     padding: 1rem;
-    z-index:0;
+    z-index:5;
+    bottom:0;
 `
 
 export default function ChatInput ({user, room, userAvatar}:{userAvatar: string, user:string, room:string}) {
