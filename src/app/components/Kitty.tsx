@@ -1,5 +1,5 @@
 import { Canvas, useLoader } from '@react-three/fiber';
-import KittyModel from './KittyModel';
+import KittyModel from './KittyModel.jsx';
 import styled from 'styled-components';
 
 

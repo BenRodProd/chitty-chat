@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 
-export default function KittyModel({ animationCall}:{animationCall:string}) {
+export default function KittyModel({ animationCall}) {
   const group = useRef();
   const { nodes, materials } = useGLTF('./kitty.glb');
   const [targetRotation, setTargetRotation] = useState(0); // Target rotation value
@@ -18,7 +18,7 @@ export default function KittyModel({ animationCall}:{animationCall:string}) {
     }
   });
 
-  const startAnimation = (animationName:string, boneName: string, repetitions: number, speed: number) => {
+  const startAnimation = (animationName, boneName, repetitions, speed) => {
     const bone = nodes.cat.skeleton.bones.find(bone => bone.name === boneName);
     if (!bone) return;
 
