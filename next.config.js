@@ -14,5 +14,9 @@ const nextConfig = {
       }
 }
 
-module.exports = nextConfig
+module.exports = {
+  serverMiddleware: [
+  { path: '/api/middleware', handler: '~/app/api/middleware.ts' },
+],nextConfig
+};
 
