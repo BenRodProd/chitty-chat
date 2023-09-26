@@ -4,7 +4,6 @@ import Main from './components/Main';
 import { auth } from '@/service/firebase';
 import Login from '@/service/login';
 import { User } from "./types/types";
-import { Settings } from './components/Settings';
 import styled from 'styled-components';
 
 const MainDiv = styled.div`
@@ -12,8 +11,19 @@ const MainDiv = styled.div`
   flex-direction: column;
   height: 100vh;
   width: 100vw;
+  overflow: hidden;
+  z-index:-12;
 `
 
+const StyledFooter = styled.footer`
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  
+  position: absolute;
+  bottom:0;
+  width: 100%;
+`
 
 export default function Home(): JSX.Element {
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
@@ -43,7 +53,7 @@ export default function Home(): JSX.Element {
     
       {loggedIn ? <Main user={user as User} /> : <Login />}
      
-      <footer>(c) 2023 BenRodProd</footer>
+      <StyledFooter>(c) 2023 BenRodProd</StyledFooter>
     </MainDiv>
   );
 }

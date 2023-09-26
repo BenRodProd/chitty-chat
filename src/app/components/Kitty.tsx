@@ -10,14 +10,14 @@ const CanvasPlacement = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-border:3px dotted red;
-z-index:5;
+
+z-index:-15;
 `
 
 
 
 
-const Kitty = () => {
+const Kitty = ({animationCall}:{animationCall:string}) => {
   return (
     <CanvasPlacement>
     <Canvas style={{ width: '100%', height: '100%' }}>
@@ -25,7 +25,7 @@ const Kitty = () => {
         
         <ambientLight intensity={0.5} />
         <directionalLight intensity={0.8} position={[5, 5, 5]} />
-      <KittyModel />
+      <KittyModel animationCall={animationCall}/>
     </Canvas>
     </CanvasPlacement>
   );
