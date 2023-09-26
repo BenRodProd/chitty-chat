@@ -2,7 +2,7 @@ import getUserInfos from "@/service/getUserInfo";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-
+import { UserData } from "../types/types";
 const StyledListItem = styled.li`
 
 display:flex;
@@ -53,20 +53,28 @@ export default function FriendList({ friends }: { friends: string[] | null }): J
   const [friendData, setFriendData] = useState<{ nickname: string; avatar: string }[]>([]);
 
   useEffect(() => {
-    if (friends && friends.length > 0) {
-      const fetchFriendData = async () => {
-        const data = await Promise.all(
-          friends.map(async (friendEmail) => {
-            const userData = await getUserInfos(friendEmail);
-            const { nick, avatar } = userData;
-            return { nickname: nick || "No Nickname", avatar: avatar || "No Avatar" };
-          })
-        );
+    // Define an async function to fetch user data for a single friend
+    const fetchFriendData = async (friendEmail: string) => {
+      const userData = (await getUserInfos(friendEmail)) as UserData | null;
+      if (userData) {
+        const { nick, avatar } = userData;
+        return { nickname: nick || "No Nickname", avatar: avatar || "No Avatar" };
+      } else {
+        // Handle the case where userData is null (user not found)
+        // You can return a default value or handle it as needed.
+      }
+    };
+  
+    // Use Promise.all to fetch data for all friends in parallel
+    const fetchDataForAllFriends = async () => {
+      if (friends && friends.length > 0) {
+        const data = await Promise.all(friends.map(fetchFriendData));
         setFriendData(data);
-      };
-
-      fetchFriendData();
-    }
+      }
+    };
+  
+    fetchDataForAllFriends(); // Call the async function to fetch data
+  
   }, [friends]);
 
   return (

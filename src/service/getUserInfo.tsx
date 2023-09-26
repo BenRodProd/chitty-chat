@@ -1,8 +1,8 @@
 import { doc, getDoc } from 'firebase/firestore';
 import { firestore } from './firebase'; // Import your Firestore instance
-
+import { UserData } from '@/app/types/types';
 // Define a function to fetch the user's city and style from Firestore
-async function getUserInfos(userEmail : string) {
+async function getUserInfos(userEmail : string): Promise<UserData | null>  {
   try {
     const userDocRef = doc(firestore, 'user', userEmail); // Adjust the collection and document path as needed
     const docSnapshot = await getDoc(userDocRef);
