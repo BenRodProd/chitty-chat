@@ -10,7 +10,7 @@ async function getRoomConversation(userEmail : string, room:string) {
     if (docSnapshot.exists()) {
       const userData = docSnapshot.data();
       const chat = userData.chat;
-      const chatInRoom = chat.filter((item) => item.room === room);
+      const chatInRoom = chat.filter((item:any) => item.room === room);
       return { chatInRoom };
     } else {
       return null; // Return null if the user's document is not found
