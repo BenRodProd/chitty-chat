@@ -72,7 +72,7 @@ function handleChooseRoom(room: string) {
         <StyledRoomChoice>
         <h2>Create new Room</h2>
             <form onSubmit={(e) => handleCreateRoom(e, user)}>
-                <input type="text" placeholder="RoomName" name="roomname" />
+                <input type="text" max="20" placeholder="RoomName" name="roomname" />
                 <button type="submit">OK</button>
             </form>
             <hr/>

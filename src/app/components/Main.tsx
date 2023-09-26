@@ -57,7 +57,7 @@ padding:12px;
 background-color: lightblue;
 border: 3px black solid;
 border-radius: 12px;
-
+user-select: none;
 `
 
 const MainDiv = styled.div`

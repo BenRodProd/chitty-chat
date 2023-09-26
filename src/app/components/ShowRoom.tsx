@@ -132,7 +132,7 @@ export default function ShowRoom({ userNick, userAvatar, activeRoom, user }: { u
         ))}
       </MessageBox>
       <ChatInput user={userNick} userAvatar={userAvatar} room={activeRoom} />
-      <Kitty animationCall="no" />
+      <Kitty animationCall="follow" />
     </ChatRoomStyle>
   );
 }
