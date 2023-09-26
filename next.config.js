@@ -15,8 +15,20 @@ const nextConfig = {
 }
 
 module.exports = {
-  serverMiddleware: [
-  { path: '/api/middleware', handler: '~/app/api/middleware.ts' },
-],nextConfig
-};
+  nextConfig,
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          {
+            key: "Cross-Origin-Opener-Policy",
+            value: "same-origin", // "same-origin-allow-popups"
+          },
+        ],
+      },
+    ];
+  },
+}
+
 
