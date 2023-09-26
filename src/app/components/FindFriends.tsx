@@ -64,7 +64,7 @@ export default function FindFriends({
     <FriendsDiv>
       <h2>Add a friend to your friendlist.</h2>
       <p>Choose someone to connect with:</p>
-      {allUsers.map((user, index) => (
+      {allUsers.map((user:any, index) => (
         <FriendSelector onClick={() => handleAddFriend(user)} key={index}>
           {user.nick}
         </FriendSelector>
