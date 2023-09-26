@@ -4,7 +4,8 @@ import styled from "styled-components";
 
 const StyledInput = styled.textarea`
 display:flex;
-
+caret-color: black;
+caret-shape: bar;
     height:5rem;
     width: 50%;
     background-color: rgba(255,255,255,0.7);
