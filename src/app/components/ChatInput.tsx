@@ -38,7 +38,7 @@ export default function ChatInput ({user, room, userAvatar}:{userAvatar: string,
         <>
         <StyledForm onSubmit={(e)=>handleChatSubmit(e)}>
         <Image src = {userAvatar} width="50" height="50" alt="UserAvatar" />
-            <StyledInput required autoFocus type="text" name="text" max="1000" />
+            <StyledInput required autoFocus name="text"  />
             <button type ="submit">Send</button>
         </StyledForm>
         </>
