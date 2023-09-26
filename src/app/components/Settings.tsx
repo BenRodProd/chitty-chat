@@ -107,7 +107,7 @@ function handleShowRoom() {
     <StyledButton type="button" onClick={() => handleShowRoom()}>Add Room</StyledButton>
     {addRoom && <CreateRoom rooms={rooms} user={user} setRooms={setRooms}/>}
     <StyledButton type="button" onClick={() => handleChangeAvatar()}>Change Avatar</StyledButton>
-    {changeAvatar && <ChooseAvatar user={user} avatar={avatar} setAvatar={setAvatar} handleChangeAvatar={handleChangeAvatar}/>}
+    {changeAvatar && avatar && <ChooseAvatar avatar={avatar} setAvatar={setAvatar} handleChangeAvatar={handleChangeAvatar}/>}
     <StyledButton type="button" onClick={() => auth.signOut()}>Logout</StyledButton>
     </SettingsWindow>
     </Backdrop>
