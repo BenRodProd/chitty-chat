@@ -44,6 +44,7 @@ useEffect(() => {
       setAllRooms(uniqueRooms);
     });
   }, []);
+
    function handleCreateRoom(e: any, user: any) {
         e.preventDefault();
         
@@ -74,7 +75,7 @@ function handleChooseRoom(room: string) {
                 <input type="text" placeholder="RoomName" name="roomname" />
                 <button type="submit">OK</button>
             </form>
-            <hr width="100%"></hr>
+            <hr/>
             {allRooms && <h2>select a room to add:</h2>}
             <RoomList>
             {allRooms && allRooms.map((room:string, index:number) => {
