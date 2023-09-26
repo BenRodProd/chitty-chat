@@ -11,7 +11,7 @@ caret-shape: bar;
     background-color: rgba(255,255,255,0.7);
     margin: 0 1rem;
     z-index:12;
-
+padding: 10px;
 `
 const StyledForm = styled.form`
     display:flex;
