@@ -72,33 +72,33 @@ overflow: hidden;
 
 export default function Main({ user }: { user: User}  ): JSX.Element {
   const [userNick, setUserNick] = useState<string>();
-  const [userFriends, setUserFriends] = useState<string[]>();
+  const [userFriends, setUserFriends] = useState<string[]>([]);
 const [userRooms, setUserRooms] = useState<string[]>();
   const [settings, setSettings] = useState<boolean>(false);
-const [userAvatar, setUserAvatar] = useState<string>();
+const [userAvatar, setUserAvatar] = useState<string>("");
 const [activeRoom, setActiveRoom] = useState<string>();
   useEffect(() => {
-    if (userFriends) {
+    if (userFriends && user.email) {
       writeToFirestore(user.email, "friends", userFriends);
     }
   }, [userFriends, user.email]);
 
 
 useEffect(() => {
-  if (userRooms) {
+  if (userRooms && user.email) {
     writeToFirestore(user.email, "rooms", userRooms);
   }
 },[userRooms, user.email])
 
 useEffect(() => {
-  if (userAvatar) {
+  if (userAvatar && user.email) {
     writeToFirestore(user.email, "avatar", userAvatar);
   }
 },[userAvatar, user.email])
 
 
 useEffect(() => {
-  
+  if (user.email) {
   getUserInfos(user.email)
   .then((data) => {
 console.log(data)
@@ -116,21 +116,22 @@ console.log(data)
     }
 
   })
+}
 },[user])
 
 
 
-if (!userNick) return (
+if (!userNick && user.email && user.displayName) return (
   <Introduction userEmail={user.email} userName={user.displayName} setNickName={setUserNick}/>
 )
-if (!userFriends) return (
+if (!userFriends && user.email) return (
   <FindFriends userEmail={user.email} setFriends={setUserFriends} friends={userFriends}/>
 )
 if (!userRooms) return (
   <CreateRoom user={user} setRooms={setUserRooms} rooms={userRooms}/>
 )
 if (!userAvatar) return (
-  <ChooseAvatar avatar={userAvatar} setAvatar={setUserAvatar}/>
+  <ChooseAvatar handleChangeAvatar={setUserAvatar} avatar={userAvatar} setAvatar={setUserAvatar}/>
 )
 
 console.log("user", user.email, "nichname", userNick, "friends", userFriends)
@@ -146,7 +147,7 @@ console.log("user", user.email, "nichname", userNick, "friends", userFriends)
       <RoomList rooms={userRooms} setActiveRoom={setActiveRoom}/>
       </ProfileLists>
       </ProfileSection>
-      {activeRoom && <ShowRoom userNick={userNick} userAvatar={userAvatar} user={user} activeRoom={activeRoom}/>}
+      {activeRoom && userNick && <ShowRoom userNick={userNick} userAvatar={userAvatar} user={user} activeRoom={activeRoom}/>}
       
     </MainDiv>
 
