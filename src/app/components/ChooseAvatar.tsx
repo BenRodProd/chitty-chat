@@ -9,7 +9,7 @@ export default function ChooseAvatar({ avatar, setAvatar, handleChangeAvatar }: 
   useEffect(() => {
     const shuffledAvatars = shuffleArray(avatarImages);
     setShuffledAvatarImages(shuffledAvatars);
-  }, [avatarImages]);
+  }, []);
 
   const [currentAvatarIndex, setCurrentAvatarIndex] = useState<number>(0);
   const [shuffledAvatarImages, setShuffledAvatarImages] = useState<string[]>(avatarImages);

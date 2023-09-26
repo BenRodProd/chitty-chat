@@ -19,10 +19,12 @@ const StyledFooter = styled.footer`
   display: flex;
   text-align: center;
   justify-content: center;
-  z-index: -5;
+  z-index: 0;
   position: absolute;
   bottom:0;
   width: 100%;
+  font-size: 0.8rem;
+  font-weight: bold;
 `
 
 export default function Home(): JSX.Element {

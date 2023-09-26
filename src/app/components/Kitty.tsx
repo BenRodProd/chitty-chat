@@ -1,7 +1,7 @@
 import { Canvas, useLoader } from '@react-three/fiber';
-import KittyModel from '../../../public/assets/kitty/KittyModel';
+import KittyModel from './KittyModel';
 import styled from 'styled-components';
-import { OrbitControls } from '@react-three/drei';
+
 
 const CanvasPlacement = styled.div`
   display: flex;

@@ -81,17 +81,30 @@ const [changeAvatar, setChangeAvatar] = useState(false)
 
 function handleChangeAvatar() {
     setChangeAvatar(prev => !prev)
-
+    setAddFriend(false)
+    setAddRoom(false)
 }
+function handleShowFriends() {
+    setAddFriend(prev => !prev)
+    setAddRoom(false)
+    setChangeAvatar(false)
+}
+function handleShowRoom() {
+    setAddRoom(prev => !prev)
+    setAddFriend(false)
+    setChangeAvatar(false)
+}
+
+
 
     return (
         <Backdrop>
             <SettingsWindow>
-                <CloseButton onClick={() => setSettings(prev => !prev)}>x</CloseButton>
+                <CloseButton onClick={() => setSettings(false)}>X</CloseButton>
     
-    <StyledButton type="button" onClick={() => setAddFriend(prev => !prev)}>Add Friend</StyledButton>
+    <StyledButton type="button" onClick={() => handleShowFriends()}>Add Friend</StyledButton>
     {addFriend && <FindFriends friends={friends} userEmail={user.email} setFriends={setFriends}/>}
-    <StyledButton type="button" onClick={() => setAddRoom(prev => !prev)}>Add Room</StyledButton>
+    <StyledButton type="button" onClick={() => handleShowRoom()}>Add Room</StyledButton>
     {addRoom && <CreateRoom rooms={rooms} user={user} setRooms={setRooms}/>}
     <StyledButton type="button" onClick={() => handleChangeAvatar()}>Change Avatar</StyledButton>
     {changeAvatar && <ChooseAvatar user={user} avatar={avatar} setAvatar={setAvatar} handleChangeAvatar={handleChangeAvatar}/>}

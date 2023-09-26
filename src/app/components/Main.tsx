@@ -34,12 +34,12 @@ const SettingsButton = styled.button`
 
 display:flex;
 position:absolute;
-left:1px;
-top:1px;
-background-color: #4caf4f88;
+left:0;
+top:0;
+background-color: #4caf4fe6;
 border: none;
 color: white;
-padding: 15px 32px;
+padding: 8px 8px;
 text-align: center;
 text-decoration: none;
 display: inline-block;
@@ -57,6 +57,7 @@ padding:12px;
 background-color: lightblue;
 border: 3px black solid;
 border-radius: 12px;
+
 `
 
 const MainDiv = styled.div`

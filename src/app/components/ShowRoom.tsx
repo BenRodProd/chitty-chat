@@ -8,22 +8,28 @@ import styled from "styled-components";
 
 const ChatBubble = styled.div`
   display: flex;
+  position:relative;
   width: 50%;
   border: 3px black solid;
   background-color: lightgreen;
   text-align: left;
-  align-self: ${(props) => (props.$isCurrentUser ? "flex-end" : "flex-start")};
+  align-self: ${(props) => (props.$isCurrentUser==="true" ? "flex-end" : "flex-start")};
   z-index: 1;
   margin-bottom: 1rem;
   padding:0.5rem;
   border-radius: 12px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 `
 
-const DisplayTime = styled.div`
+const DisplayTime = styled.p`
+display:inline-block;
+position:absolute;
   align-self: flex-end;
-  font-size:0.7rem;
+  font-size:0.5rem;
   text-align:right;
   width:100%;
+  right:3px;
+  bottom:0;
   
 
 `
@@ -48,7 +54,7 @@ const MessageBox = styled.div`
     height: 55%;
   }
   @media screen and (min-width: 600px) {
-    height: 80%;
+    height: 75%;
   }
 
 `
@@ -60,7 +66,7 @@ const RoomHeader = styled.p`
   letter-spacing: 0.5rem;
   border: 3px black solid;
   border-radius: 12px;
-  background-color: l
+  
 `
 
 export default function ShowRoom({ userNick, userAvatar, activeRoom, user }: { userNick: string, userAvatar: string, activeRoom: string, user: any }) {
@@ -103,13 +109,14 @@ export default function ShowRoom({ userNick, userAvatar, activeRoom, user }: { u
     return date.toLocaleDateString('en-US', options); // Format the date/time as desired
   }
   };
+  console.log(messages, userNick)
   return (
     <ChatRoomStyle>
       <RoomHeader>{activeRoom}</RoomHeader>
       <MessageBox ref={messageBoxRef}>
         {messages.map((message) => (
         
-          <ChatBubble key={message.id} $isCurrentUser={message.user === userNick ? "true" : "false"}>
+          <ChatBubble key={message.id} $isCurrentUser={message.user[0] === userNick ? "true" : "false"}>
             <Image src={message.avatar[0]} width="50" height="50" alt="userAvatar" />
             <p>{message.text}</p>
               

@@ -2,7 +2,7 @@ import writeToChat from "@/service/writeChat";
 import Image from "next/image";
 import styled from "styled-components";
 
-const StyledInput = styled.input`
+const StyledInput = styled.textarea`
 display:flex;
 
     height:5rem;
@@ -38,7 +38,7 @@ export default function ChatInput ({user, room, userAvatar}:{userAvatar: string,
         <>
         <StyledForm onSubmit={(e)=>handleChatSubmit(e)}>
         <Image src = {userAvatar} width="50" height="50" alt="UserAvatar" />
-            <StyledInput type="text" name="text" max="1000"/>
+            <StyledInput required autoFocus type="text" name="text" max="1000" />
             <button type ="submit">Send</button>
         </StyledForm>
         </>
