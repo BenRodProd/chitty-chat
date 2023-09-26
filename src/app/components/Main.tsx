@@ -10,6 +10,21 @@ import RoomList from './RoomList';
 import { Settings } from './Settings';
 import writeToFirestore from '@/service/writeUserInfo';
 import ChooseAvatar from './ChooseAvatar';
+import ShowRoom from './ShowRoom';
+import Image from 'next/image';
+import styled from 'styled-components';
+
+const ProfileSection = styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+width: 20%;
+align-self: flex-end;
+  border: 3px solid black;
+  text-align: center;
+
+`
 
 export default function Main({ user }: { user: User}  ): JSX.Element {
   const [userNick, setUserNick] = useState<string>();
@@ -17,6 +32,7 @@ export default function Main({ user }: { user: User}  ): JSX.Element {
 const [userRooms, setUserRooms] = useState<string[]>();
   const [settings, setSettings] = useState<boolean>(false);
 const [userAvatar, setUserAvatar] = useState<string>();
+const [activeRoom, setActiveRoom] = useState<string>();
   useEffect(() => {
     if (userFriends) {
       writeToFirestore(user.email, "friends", userFriends);
@@ -48,11 +64,11 @@ console.log(data)
     if (data && data.friends) {
       setUserFriends(data.friends)
     }
+    if (data && data.avatar) {
+      setUserAvatar(data.avatar)
+    }
     if (data && data.rooms) {
       setUserRooms(data.rooms)
-    }
-    if (data && data.avatar) {
-      setUserRooms(data.avatar)
     }
 
   })
@@ -79,8 +95,13 @@ console.log("user", user.email, "nichname", userNick, "friends", userFriends)
     <>
     <button type="button" onClick = {()=>setSettings(prev => !prev)} >Settings</button>
      {settings && <Settings avatar={userAvatar} setAvatar={setUserAvatar} friends={userFriends} rooms={userRooms} user={user} setRooms={setUserRooms} setFriends={setUserFriends} />}
+      <ProfileSection>
+      <Image src={userAvatar} alt="avatar" width={100} height={100}/>
       <FriendList friends={userFriends}/>
-      <RoomList rooms={userRooms}/>
+      <RoomList rooms={userRooms} setActiveRoom={setActiveRoom}/>
+      </ProfileSection>
+      {activeRoom && <ShowRoom userNick={userNick} userAvatar={userAvatar} user={user} activeRoom={activeRoom}/>}
+      
     </>
   );
 

@@ -9,7 +9,8 @@ const nextConfig = {
         STORAGEBUCKET: process.env.STORAGEBUCKET,
         MEASUREMENTID: process.env.MEASUREMENTID,
         APPID: process.env.APPID,
-        MEASUREMENTID: process.env.MEASUREMENTID
+        MEASUREMENTID: process.env.MEASUREMENTID,
+        OPENAIKEY: process.env.OPENAIKEY
       }
 }
 

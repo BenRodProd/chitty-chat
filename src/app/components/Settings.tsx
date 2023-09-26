@@ -4,7 +4,7 @@ import { useState } from "react"
 import FindFriends from "./FindFriends"
 import CreateRoom from "./CreateRoom"
 import ChooseAvatar from "./ChooseAvatar"
-export function Settings({user, setRooms, setFriends, friends, rooms, avatar, setAvatar}: {user: any, setRooms: any, setFriends: any, friends: string[], rooms: string[] | undefined, avatar: string, setAvatar: any}): JSX.Element {
+export function Settings({user, setRooms, setFriends, friends, rooms, avatar, setAvatar}: {user: any, setRooms: any, setFriends: any, friends: string[], rooms: string[] | undefined, avatar: string | undefined, setAvatar: any}): JSX.Element {
 const [addFriend, setAddFriend] = useState(false)
 const [addRoom, setAddRoom] = useState(false)
 const [changeAvatar, setChangeAvatar] = useState(false)
