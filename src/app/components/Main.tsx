@@ -10,9 +10,21 @@ import RoomList from './RoomList';
 import { Settings } from './Settings';
 import writeToFirestore from '@/service/writeUserInfo';
 import ChooseAvatar from './ChooseAvatar';
-import Kitty from './Kitty';
 import ShowRoom from './ShowRoom';
 import Image from 'next/image';
+import styled from 'styled-components';
+
+const ProfileSection = styled.div`
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+width: 20%;
+align-self: flex-end;
+  border: 3px solid black;
+  text-align: center;
+
+`
 
 export default function Main({ user }: { user: User}  ): JSX.Element {
   const [userNick, setUserNick] = useState<string>();
@@ -83,9 +95,11 @@ console.log("user", user.email, "nichname", userNick, "friends", userFriends)
     <>
     <button type="button" onClick = {()=>setSettings(prev => !prev)} >Settings</button>
      {settings && <Settings avatar={userAvatar} setAvatar={setUserAvatar} friends={userFriends} rooms={userRooms} user={user} setRooms={setUserRooms} setFriends={setUserFriends} />}
+      <ProfileSection>
       <Image src={userAvatar} alt="avatar" width={100} height={100}/>
       <FriendList friends={userFriends}/>
       <RoomList rooms={userRooms} setActiveRoom={setActiveRoom}/>
+      </ProfileSection>
       {activeRoom && <ShowRoom userNick={userNick} userAvatar={userAvatar} user={user} activeRoom={activeRoom}/>}
       
     </>

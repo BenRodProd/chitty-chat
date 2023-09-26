@@ -21,11 +21,14 @@ console.log(friends)
   }, [friends]);
 
   return (
+    <div>
+    <h3>Your friends:</h3>
+    <hr></hr>
     <ul>
-      <p>Your friends:</p>
       {friendNicknames.map((nickname, index) => (
         <li key={index}>{nickname}</li>
       ))}
     </ul>
+    </div>
   );
 }

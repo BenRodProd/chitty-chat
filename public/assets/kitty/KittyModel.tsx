@@ -4,12 +4,12 @@ import { useGLTF, useAnimations } from '@react-three/drei'
 export default function KittyModel(props) {
   const group = useRef()
   const { nodes, materials, animations } = useGLTF('./kitty.glb')
-  const { actions } = useAnimations(animations, group)
+
 
   const scale= 5
-  const rotationY=0.1
+  const rotationY=0.2
   return (
-    <group ref={group} scale={[scale, scale, scale]} {...props} dispose={null} rotation={[0, rotationY, 0]}>
+    <group position={[0,-2,2]} ref={group} scale={[scale, scale, scale]} {...props} dispose={null} rotation={[0, rotationY, 0]}>
       <group name="Scene">
         <group name="Chibi_Cat" position={[-0.002, 0, 0]} >
           <primitive object={nodes.root} />

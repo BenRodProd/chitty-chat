@@ -5,7 +5,14 @@ import { auth } from '@/service/firebase';
 import Login from '@/service/login';
 import { User } from "./types/types";
 import { Settings } from './components/Settings';
+import styled from 'styled-components';
 
+const MainDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+`
 
 
 export default function Home(): JSX.Element {
@@ -32,11 +39,11 @@ export default function Home(): JSX.Element {
   }, []);
   
   return (
-    <>
+    <MainDiv>
     
       {loggedIn ? <Main user={user as User} /> : <Login />}
      
       <footer>(c) 2023 BenRodProd</footer>
-    </>
+    </MainDiv>
   );
 }
