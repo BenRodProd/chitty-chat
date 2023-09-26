@@ -50,7 +50,7 @@ function handleChooseRoom (room: string) {
             <RoomTitle>your rooms:</RoomTitle>
             
             <ul>
-            {rooms.map((room:string, index:number) => {
+            {rooms && rooms.map((room:string, index:number) => {
                 return <StyledListItem onClick={() => handleChooseRoom(room)} key={index}>{room}</StyledListItem>
             })}
             </ul>
