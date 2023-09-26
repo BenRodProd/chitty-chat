@@ -102,6 +102,12 @@ export default function ShowRoom({ userNick, userAvatar, activeRoom, user }: { u
       unsubscribe();
     };
   }, [activeRoom, user]);
+  useEffect(() => {
+    if (messageBoxRef.current) {
+      messageBoxRef.current.scrollTop = messageBoxRef.current.scrollHeight;
+    }
+  }, [messages]);
+
   const formatTimestamp = (timestamp: any) => {
     if(timestamp) {
     const date = timestamp.toDate(); // Convert Firebase timestamp to JavaScript Date
