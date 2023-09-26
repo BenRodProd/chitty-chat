@@ -68,7 +68,7 @@ export default function FriendList({ friends }: { friends: string[] | null }): J
     // Use Promise.all to fetch data for all friends in parallel
     const fetchDataForAllFriends = async () => {
       if (friends && friends.length > 0) {
-        const data = await Promise.all(friends.map(fetchFriendData));
+        const data = (await Promise.all(friends.map(fetchFriendData))) as { nickname: string; avatar: string }[];
         setFriendData(data);
       }
     };
