@@ -36,7 +36,7 @@ display:flex;
 position:absolute;
 left:1px;
 top:1px;
-background-color: #4CAF50;
+background-color: #4caf4f88;
 border: none;
 color: white;
 padding: 15px 32px;
