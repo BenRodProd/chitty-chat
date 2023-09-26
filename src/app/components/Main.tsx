@@ -101,7 +101,7 @@ useEffect(() => {
   if (user.email) {
   getUserInfos(user.email)
   .then((data) => {
-console.log(data)
+
     if (data && data.nick) {
       setUserNick(data.nick)
     }
@@ -134,7 +134,7 @@ if (!userAvatar) return (
   <ChooseAvatar handleChangeAvatar={setUserAvatar} avatar={userAvatar} setAvatar={setUserAvatar}/>
 )
 
-console.log("user", user.email, "nichname", userNick, "friends", userFriends)
+
 
   return (
       <MainDiv>

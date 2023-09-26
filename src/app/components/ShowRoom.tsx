@@ -115,7 +115,7 @@ export default function ShowRoom({ userNick, userAvatar, activeRoom, user }: { u
     return date.toLocaleDateString('en-US', options); // Format the date/time as desired
   }
   };
-  console.log(messages, userNick)
+
   return (
     <ChatRoomStyle>
       <RoomHeader>{activeRoom}</RoomHeader>

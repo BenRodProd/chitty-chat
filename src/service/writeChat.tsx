@@ -4,7 +4,7 @@ import { v4 } from 'uuid';
 export default async function writeToChat(username: string, userAvatar:string, room: string, text: any) {
   // Define the Firestore document reference
   const uuid = v4()
-  console.log(uuid)
+
   const userDocRef = doc(firestore, 'chat', uuid); // Assuming 'username' is the document ID
 
   try {

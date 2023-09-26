@@ -41,7 +41,7 @@ text-decoration: underline;
 
 export default function RoomList ({rooms, setActiveRoom}:{rooms: string[] | null, setActiveRoom:any}): JSX.Element {
 function handleChooseRoom (room: string) {
-    console.log("click")
+
     setActiveRoom(room)
 }
     

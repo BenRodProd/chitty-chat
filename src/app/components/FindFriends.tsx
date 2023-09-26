@@ -53,7 +53,7 @@ export default function FindFriends({
           : [user.email];
 
       setFriends(updatedFriends);
-      console.log(updatedFriends)
+     
       // Optionally, you can also update the database here if needed
       writeToFirestore(userEmail, "friends", updatedFriends);
     }
