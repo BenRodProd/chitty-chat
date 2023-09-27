@@ -74,6 +74,7 @@ export default function ShowRoom({ userNick, userAvatar, activeRoom, user }: { u
   const [kittyAnimation, setKittyAnimation] = useState<string>("");
   const [textCoordinates, setTextCoordinates] = useState<number>(0);
   const [typing, setTyping] = useState<boolean>(false);
+  const [textAreaSize, setTextAreaSize] = useState<number>(0);
   const messageBoxRef = useRef<HTMLDivElement | null>(null); // Create a ref for the MessageBox
 
   useEffect(() => {
@@ -140,8 +141,8 @@ export default function ShowRoom({ userNick, userAvatar, activeRoom, user }: { u
              
         ))}
       </MessageBox>
-      <ChatInput setTyping = {setTyping} setTextCoordinates={setTextCoordinates} user={userNick} userAvatar={userAvatar} room={activeRoom} />
-      <Kitty setAnimationCall={setKittyAnimation} typing={typing} animationCall={kittyAnimation} textCoordinates={textCoordinates} />
+      <ChatInput setTextAreaSize={setTextAreaSize} setTyping = {setTyping} setTextCoordinates={setTextCoordinates} user={userNick} userAvatar={userAvatar} room={activeRoom} />
+      <Kitty textAreaSize={textAreaSize} setAnimationCall={setKittyAnimation} typing={typing} animationCall={kittyAnimation} textCoordinates={textCoordinates} />
     </ChatRoomStyle>
   );
 }

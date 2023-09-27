@@ -4,7 +4,7 @@ import { useFrame } from '@react-three/fiber';
 import { MathUtils, Vector3 } from 'three'; // Import MathUtils from Three.js
 
 
-export default function KittyModel({ animationCall, textCoordinates, typing, setAnimationCall }) {
+export default function KittyModel({ textAreaSize, animationCall, textCoordinates, typing, setAnimationCall }) {
   const group = useRef();
   const { nodes, materials } = useGLTF('./kitty.glb');
   const [targetRotation, setTargetRotation] = useState({ x: 0, y: 0 }); // Target rotation values
@@ -20,11 +20,11 @@ export default function KittyModel({ animationCall, textCoordinates, typing, set
   }
 useEffect(() => {
     if (typing) {
-      console.log(textCoordinates)
+      console.log(textAreaSize, textCoordinates)
     const minRotationX = 1;
     const maxRotationX = -1;
    
-    const lettersPerLine = 61; // Number of letters per line
+    const lettersPerLine = textAreaSize; // Number of letters per line
 
 const remainder = (textCoordinates - 1) % lettersPerLine;
 
@@ -146,7 +146,7 @@ const mappedRotationX = MathUtils.mapLinear(remainder, 0, lettersPerLine - 1, mi
       headBone.rotation.y = 0
       // Rotate it back to normal after 2 seconds
       setTimeout(() => {
-        console.log(backBone.rotation.x)
+    
         if (backBone) {
           backBone.rotation.x = -1.5869743022867884;
         }
