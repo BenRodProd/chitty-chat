@@ -111,11 +111,13 @@ export default function ShowRoom({ userNick, userAvatar, activeRoom, user }: { u
 
   useEffect(() => {
     setKittyAnimation("follow");
-    /*
+    
     setTimeout(() => {
       setKittyAnimation("sit")
     },5000)
-    */
+    setTimeout(() => {
+      setKittyAnimation("follow")
+    }, 7000)
   },[])
 
   const formatTimestamp = (timestamp: any) => {

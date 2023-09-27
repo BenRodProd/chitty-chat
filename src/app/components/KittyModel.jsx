@@ -9,6 +9,7 @@ export default function KittyModel({ animationCall }) {
   const [targetRotation, setTargetRotation] = useState({ x: 0, y: 0 }); // Target rotation values
 
   const headBone = nodes.cat.skeleton.bones.find(bone => bone.name === 'MCH_head'); // Replace 'MCH_head' with the actual name of the head bone
+  const backBone = nodes.cat.skeleton.bones.find(bone => bone.name === 'MCH_back004');
 
   const startAnimation = (animationName, boneName, repetitions, speed) => {
     const bone = nodes.cat.skeleton.bones.find(bone => bone.name === boneName);
@@ -31,17 +32,21 @@ export default function KittyModel({ animationCall }) {
           }, 500);
         }, 500);
       };
-
+      
       animate(repetitions);
     }
   };
-
+  
   const rotateHeadToCursor = (e) => {
     if (!headBone) return;
-  
+    
     const cursorX = (e.clientX / window.innerWidth) * 2 - 1;
-    const cursorY = -(e.clientY / window.innerHeight) * 2 + 1;
-  console.log(cursorX, cursorY)
+    let cursorY = -(e.clientY / window.innerHeight) * 3 + 0.5;
+
+
+
+    console.log(cursorX, headBone.rotation.x);
+
     // Calculate the direction vector from the head to the cursor
     const direction = new Vector3(cursorX, cursorY, 0).sub(headBone.position);
     direction.normalize();
@@ -49,14 +54,27 @@ export default function KittyModel({ animationCall }) {
     // Calculate the angles for rotation and negate them
     let yawAngle = -Math.atan2(direction.x, direction.z);
     let pitchAngle = -Math.atan2(-direction.y, Math.sqrt(direction.x * direction.x + direction.z * direction.z));
-  
+    let minPitch
+    let maxPitch
+    if (cursorY >= -2) {
     // Define rotation limits (in radians)
-    const minPitch = -5000; // Minimum pitch angle
-    const maxPitch = -1;  // Maximum pitch angle
-  
-    const minYaw = -2;    // Minimum yaw angle
-    const maxYaw = 2;     // Maximum yaw angle
-  
+    minPitch = -5; // Minimum pitch angle
+    maxPitch = -1;  // Maximum pitch angle
+    }
+    else {
+      minPitch = -50
+      maxPitch = -2
+    }
+    let minYaw
+    let maxYaw
+    if (cursorX > -0.3 && cursorX < 0.3) {
+    minYaw = -0.2;    // Minimum yaw angle
+   maxYaw = 0.2;     // Maximum yaw angle
+  } else {
+    minYaw = -1
+    maxYaw = 1
+  }
+  console.log(minYaw, maxYaw)
     // Clamp the pitch and yaw angles within the defined limits
     pitchAngle = Math.max(minPitch, Math.min(maxPitch, pitchAngle));
     yawAngle = Math.max(minYaw, Math.min(maxYaw, yawAngle));
@@ -78,7 +96,7 @@ export default function KittyModel({ animationCall }) {
   useEffect(() => {
     if (animationCall === "follow") {
       document.addEventListener('mousemove', rotateHeadToCursor);
-    } else {
+    } else if (animationCall === "unfollow") {
       document.removeEventListener('mousemove', rotateHeadToCursor);
     }
 
@@ -94,8 +112,20 @@ export default function KittyModel({ animationCall }) {
       headBone.rotation.x = MathUtils.lerp(headBone.rotation.x, targetRotation.x, 0.01); // Adjust the interpolation factor (0.01) for smoother or quicker movement
       headBone.rotation.y = MathUtils.lerp(headBone.rotation.y, targetRotation.y, 0.01); // Adjust the interpolation factor (0.01) for smoother or quicker movement
     }
+    if (backBone && animationCall === "sit") {
+      const backBoneRotationY = -0.5; // Adjust the desired Y-axis rotation
+      backBone.rotation.x = backBoneRotationY;
+      headBone.rotation.x = -2.5
+      headBone.rotation.y = 0
+      // Rotate it back to normal after 2 seconds
+      setTimeout(() => {
+        console.log(backBone.rotation.x)
+        if (backBone) {
+          backBone.rotation.x = -1.5869743022867884;
+        }
+      }, 2000); // 2000 milliseconds = 2 seconds
+    }
   });
-
   const scale = 5;
   const rotationY = 0.2;
 
