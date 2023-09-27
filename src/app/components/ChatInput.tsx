@@ -28,18 +28,22 @@ const StyledForm = styled.form`
     bottom:0;
 `
 
-export default function ChatInput ({user, room, userAvatar}:{userAvatar: string, user:string, room:string}) {
+export default function ChatInput ({user, room, userAvatar, setTextCoordinates, setTyping}:{userAvatar: string, user:string, room:string, setTextCoordinates:any, setTyping:any}) {
     const handleChatSubmit = (e: any) => {
         e.preventDefault();
         writeToChat(user, userAvatar, room, e.target.text.value);
         e.target.text.value="";
-        
+        setTyping(false)
+    }
+    function getTextCoordinates(e: any) {
+        setTextCoordinates(e.target.selectionStart)
+        setTyping(true)
     }
     return (
         <>
         <StyledForm onSubmit={(e)=>handleChatSubmit(e)}>
         <Image src = {userAvatar} width="50" height="50" alt="UserAvatar" />
-            <StyledInput required autoFocus name="text"  />
+            <StyledInput onInput={(e)=>getTextCoordinates(e)}required autoFocus name="text"  />
             <button type ="submit">Send</button>
         </StyledForm>
         </>

@@ -3,13 +3,38 @@ import { useGLTF } from '@react-three/drei';
 import { useFrame } from '@react-three/fiber';
 import { MathUtils, Vector3 } from 'three'; // Import MathUtils from Three.js
 
-export default function KittyModel({ animationCall }) {
+
+export default function KittyModel({ animationCall, textCoordinates, typing, setAnimationCall }) {
   const group = useRef();
   const { nodes, materials } = useGLTF('./kitty.glb');
   const [targetRotation, setTargetRotation] = useState({ x: 0, y: 0 }); // Target rotation values
 
   const headBone = nodes.cat.skeleton.bones.find(bone => bone.name === 'MCH_head'); // Replace 'MCH_head' with the actual name of the head bone
   const backBone = nodes.cat.skeleton.bones.find(bone => bone.name === 'MCH_back004');
+
+  if (headBone && typing) {
+    setAnimationCall("unfollow")
+    setAnimationCall("typing")
+  } else if (headBone && !typing) {
+    setAnimationCall("follow")
+  }
+useEffect(() => {
+    if (typing) {
+      console.log(textCoordinates)
+    const minRotationX = 1;
+    const maxRotationX = -1;
+   
+    const lettersPerLine = 61; // Number of letters per line
+
+const remainder = (textCoordinates - 1) % lettersPerLine;
+
+// Calculate mappedRotationX based on the totalLines and remainder
+const mappedRotationX = MathUtils.mapLinear(remainder, 0, lettersPerLine - 1, minRotationX, maxRotationX);
+
+    
+    setTargetRotation({ y: mappedRotationX, x: -2 });
+}
+}, [textCoordinates])
 
   const startAnimation = (animationName, boneName, repetitions, speed) => {
     const bone = nodes.cat.skeleton.bones.find(bone => bone.name === boneName);
@@ -37,6 +62,8 @@ export default function KittyModel({ animationCall }) {
     }
   };
   
+
+
   const rotateHeadToCursor = (e) => {
     if (!headBone) return;
     
@@ -45,7 +72,7 @@ export default function KittyModel({ animationCall }) {
 
 
 
-    console.log(cursorX, headBone.rotation.x);
+
 
     // Calculate the direction vector from the head to the cursor
     const direction = new Vector3(cursorX, cursorY, 0).sub(headBone.position);
