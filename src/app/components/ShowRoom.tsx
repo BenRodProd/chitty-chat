@@ -71,6 +71,7 @@ const RoomHeader = styled.p`
 
 export default function ShowRoom({ userNick, userAvatar, activeRoom, user }: { userNick: string, userAvatar: string, activeRoom: string, user: any }) {
   const [messages, setMessages] = useState<{ id: string, [key: string]: any }[]>([]);
+  const [kittyAnimation, setKittyAnimation] = useState<string>("");
   const messageBoxRef = useRef<HTMLDivElement | null>(null); // Create a ref for the MessageBox
 
   useEffect(() => {
@@ -108,6 +109,15 @@ export default function ShowRoom({ userNick, userAvatar, activeRoom, user }: { u
     }
   }, [messages]);
 
+  useEffect(() => {
+    setKittyAnimation("follow");
+    /*
+    setTimeout(() => {
+      setKittyAnimation("sit")
+    },5000)
+    */
+  },[])
+
   const formatTimestamp = (timestamp: any) => {
     if(timestamp) {
     const date = timestamp.toDate(); // Convert Firebase timestamp to JavaScript Date
@@ -132,7 +142,7 @@ export default function ShowRoom({ userNick, userAvatar, activeRoom, user }: { u
         ))}
       </MessageBox>
       <ChatInput user={userNick} userAvatar={userAvatar} room={activeRoom} />
-      <Kitty animationCall="follow" />
+      <Kitty animationCall={kittyAnimation} />
     </ChatRoomStyle>
   );
 }

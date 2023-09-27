@@ -41,7 +41,7 @@ export default function KittyModel({ animationCall }) {
   
     const cursorX = (e.clientX / window.innerWidth) * 2 - 1;
     const cursorY = -(e.clientY / window.innerHeight) * 2 + 1;
-  
+  console.log(cursorX, cursorY)
     // Calculate the direction vector from the head to the cursor
     const direction = new Vector3(cursorX, cursorY, 0).sub(headBone.position);
     direction.normalize();
@@ -51,11 +51,11 @@ export default function KittyModel({ animationCall }) {
     let pitchAngle = -Math.atan2(-direction.y, Math.sqrt(direction.x * direction.x + direction.z * direction.z));
   
     // Define rotation limits (in radians)
-    const minPitch = -500; // Minimum pitch angle
-    const maxPitch = 0.0001;  // Maximum pitch angle
+    const minPitch = -5000; // Minimum pitch angle
+    const maxPitch = -1;  // Maximum pitch angle
   
-    const minYaw = -250;    // Minimum yaw angle
-    const maxYaw = 1;     // Maximum yaw angle
+    const minYaw = -2;    // Minimum yaw angle
+    const maxYaw = 2;     // Maximum yaw angle
   
     // Clamp the pitch and yaw angles within the defined limits
     pitchAngle = Math.max(minPitch, Math.min(maxPitch, pitchAngle));
