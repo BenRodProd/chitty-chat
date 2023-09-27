@@ -5,6 +5,7 @@ import Image from "next/image";
 import { onSnapshot, query, collection, orderBy, limit, where, QueryDocumentSnapshot } from 'firebase/firestore';
 import { firestore } from '@/service/firebase';
 import styled from "styled-components";
+import KittyChat from "./KittyChat";
 
 const ChatBubble = styled.div<{ $isCurrentUser: string }>`
   display: flex;
@@ -19,6 +20,15 @@ const ChatBubble = styled.div<{ $isCurrentUser: string }>`
   padding:0.5rem;
   border-radius: 12px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+`
+
+const ChatText = styled.p`
+width:90%;
+    word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: pre-wrap;
 `
 
 const DisplayTime = styled.p`
@@ -83,7 +93,7 @@ export default function ShowRoom({ userNick, userAvatar, activeRoom, user }: { u
       collection(firestore, 'chat'),
       where('room', 'array-contains-any', [activeRoom]), // Filter messages by the active room
       orderBy('timestamp'), // Order messages by timestamp
-      limit(50) // Limit to the last 50 messages (adjust as needed)
+      limit(500) // Limit to the last 50 messages (adjust as needed)
     );
 
     // Set up a real-time listener for the chat messages
@@ -110,6 +120,7 @@ export default function ShowRoom({ userNick, userAvatar, activeRoom, user }: { u
     if (messageBoxRef.current) {
       messageBoxRef.current.scrollTop = messageBoxRef.current.scrollHeight;
     }
+
   }, [messages]);
 
   useEffect(() => {
@@ -119,7 +130,7 @@ export default function ShowRoom({ userNick, userAvatar, activeRoom, user }: { u
   },[])
 
   const formatTimestamp = (timestamp: any) => {
-    if(timestamp) {
+  if(timestamp) {
     const date = timestamp.toDate(); // Convert Firebase timestamp to JavaScript Date
     const options = { year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric' };
     return date.toLocaleDateString('en-US', options); // Format the date/time as desired
@@ -134,7 +145,7 @@ export default function ShowRoom({ userNick, userAvatar, activeRoom, user }: { u
         
           <ChatBubble key={message.id} $isCurrentUser={message.user[0] === userNick ? "true" : "false"}>
             <Image src={message.avatar[0]} width="50" height="50" alt="userAvatar" />
-            <p>{message.text}</p>
+            <ChatText>{message.text}</ChatText>
               
               <DisplayTime>{formatTimestamp(message.timestamp)}</DisplayTime>
                       </ChatBubble>
@@ -143,6 +154,7 @@ export default function ShowRoom({ userNick, userAvatar, activeRoom, user }: { u
       </MessageBox>
       <ChatInput setTextAreaSize={setTextAreaSize} setTyping = {setTyping} setTextCoordinates={setTextCoordinates} user={userNick} userAvatar={userAvatar} room={activeRoom} />
       <Kitty textAreaSize={textAreaSize} setAnimationCall={setKittyAnimation} typing={typing} animationCall={kittyAnimation} textCoordinates={textCoordinates} />
+      {messages.length > 0 && <KittyChat messages={messages} setMessages={setMessages} messageBoxRef={messageBoxRef} room={activeRoom} />}
     </ChatRoomStyle>
   );
 }
