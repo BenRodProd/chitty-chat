@@ -92,6 +92,5 @@ export default function KittyChat({ messages, setMessages, messageBoxRef, room }
     }
   }, [messages, canKittyRespond, room, conversationState]);
 
-  console.log(conversationState);
   return null;
 }
