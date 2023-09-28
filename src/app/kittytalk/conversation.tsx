@@ -2,7 +2,7 @@
  [
     {
         "buzzwords": ["noise"],
-        "responses": ["Miau?", "Schnurr!", "Miau!", "Worüber wird hier geredet?", ""]
+        "responses": ["Miau?", "Schnurr!", "Miau!", "Worüber wird hier geredet?", "Häh?"]
       },
       {
         "buzzwords": ["hello", "hallo", "hi", "hey", "hola"],
@@ -10,19 +10,73 @@
       },
       {
         "buzzwords": ["tschüss", "bye", "ciao"],
-        "responses": ["Auf Wiedersehen", "Ciao, miau", "Tschöö mit Ö"]
+        "responses": ["Auf Wiedersehen", "Ciao, miau", "Tschöö mit Ö", "Ciao Kakao!"]
       },
       {
-        "buzzwords": ["hunger"],
-        "responses": ["Ich habe riesigen Hunger!", "Hast du Katenfutter?", "Hast du einen Fisch für mich?"]
+        
+        "buzzwords": ["hunger", "essen", "fressen", "füttern"],
+        "responses": ["Ich habe riesigen Hunger! Hast du was zu essen für mich?", "Hast du Katenfutter?", "Hast du einen Fisch für mich?"],
+        "NEXT": "ESSEN",
       },
       {
-        "buzzwords": ["wie geht es", "alles klar", "was geht"],
-        "responses": ["Mir geht es gut!", "Alles klar! Und bei Dir?", "Hunger... Sonst alles gut!"]
+        "STATE": "ESSEN",
+        "buzzwords": ["ja", "ok", "na gut", "natürlich", "klar", "hier"],
+        "responses": ["Danke! Sehr lecker", "Klasse!", "Mmmhhh... lecker!"],
+        "NEXT": "ALL"
       },
+      {
+        "STATE": "ESSEN",
+        "buzzwords": ["nein", "nope", "sorry", "nicht"],
+        "responses": ["Schade!", "Manno, ich habe so Hunger!", "Na gut, vielleicht später."],
+        "NEXT": "ALL"
+      },
+      {
+        "buzzwords": ["wie geht es", "alles klar?", "was geht"],
+        "responses": ["Mir geht es gut! Und dir?", "Alles klar! Und bei Dir?", "Hunger... Sonst alles gut! Und bei dir?"],
+        "NEXT": "WIEGEHTS"
+      },
+      {
+        "STATE": "WIEGEHTS",
+        "buzzwords": ["schlecht", "nicht gut", "geht so", "nein"],
+        "responses": ["Schade! Soll ich Dir einen Katzenwitz erzählen?", "Das tut mir leid! Soll ich dir einen Katzenwitz erzählen", "Mmmhh... Soll ich versuchen, dich aufzumuntern?"],
+        "NEXT": "FRAGE-WITZ"
+      },
+      {
+        "STATE": "WIEGEHTS",
+        "buzzwords": ["gut", "läuft", "ok", "spitze"],
+        "responses": ["Das ist super!", "Schön!", "Sehr gut..."],
+        "NEXT": "ALL"
+      },
+      {
+        "STATE": "FRAGE-WITZ",
+        "buzzwords": ["nein", "nicht"],
+        "responses": ["Ok! Vielleicht später", "Alles klar! Vielleicht später", "Nicht den Kopf hängen lassen!"],
+        "NEXT":"ALL"
+      },
+      {
+        "buzzwords": ["katzenwitz", "witz erzählen", "witze", "witz"],
+        "responses": ["Soll ich einen Katzenwitz erzählen?", "Möchtest du einen Katzenwitz hören?", "Ich kenne viele Katzenwitze. Möchtest du einen hören?"],
+        "NEXT":"FRAGE-WITZ"
+      },
+      {
+        "STATE":"FRAGE-WITZ",
+        "buzzwords": ["ok", "ja", "klar", "wieso nicht"],
+          "responses": ["Eine Katzenbesitzerin zur anderen: 'Unsere Katze hat bei einer Vogelausstellung den ersten Preis geholt!' Da fragt die andere verwirrt:'Wieso denn das?' 'Na, die Käfigtür stand offen!", "Was ist der Unterschied zwischen Hund und Katze? Der Hund denkt sich 'Mein Herrchen gibt mir immer Futter, ich glaube mein Herrchen ist Gott!' Die Katze denkt sich: 'ich bekomme immer Futter, ich glaube, ich bin Gott!'", "Wo wohnen Katzen? Im Mietzhaus!", "Warum sind Katzen gute Zocker? Weil sie sieben Leben haben!", "Warum hat die Katze neben dem Computer gesessen? Weil sie die Maus im Auge behalten wollte!", "Warum hat die Katze eine Leiter mit in die Bar gebracht? Weil sie gehört hat, dass die Getränke aufs Haus gehen!"],
+          "NEXT":"ALL"
+      },
+      {
+        "buzzwords": ["haha", "witzig", "lustig"],
+        "responses": ["Haha!", "Hihihi!", "Schnurr!"]
+      },
+        
+  
       {
         "buzzwords": ["danke", "thanks", "dankeschön"],
         "responses": ["Gern geschehen!", "Kein Problem!", "Bitte sehr!"]
+      },
+      {
+        "buzzwords": ["bitte", "bitteschön", "bittesehr"],
+        "responses": ["Vielen Dank!", "Super nett!", "Nett von dir!"]
       },
       {
         "buzzwords": ["wie alt bist du", "dein alter"],
@@ -50,7 +104,7 @@
       },
       {
         "buzzwords": ["regen", "wetter", "sonne"],
-        "responses": ["Regenwetter macht mich müde.", "Ich liebe sonnige Tage.", "Wetter ist interessant!"]
+        "responses": ["Regenwetter macht mich müde.", "Ich liebe sonnige Tage."]
       },
       {
         "buzzwords": ["musik", "lied", "tanzen"],
@@ -58,7 +112,8 @@
       },
       {
         "buzzwords": ["essen", "futter", "snack"],
-        "responses": ["Hast du leckeres Katzenfutter?", "Ich liebe Snacks!", "Lass uns gemeinsam essen."]
+        "responses": ["Hast du leckeres Katzenfutter?", "Ich liebe Snacks! Hast du leckeres Katzenfutter?", "Lass uns gemeinsam essen."],
+        "NEXT":"ESSEN"
       },
       {
         "buzzwords": ["urlaub", "reisen", "strand"],
@@ -177,7 +232,7 @@
         "responses": ["Die Welt ist bunt.", "Malst du Bilder?", "Kunst ist Ausdruck."]
       },
       {
-        "buzzwords": ["mond", "sterne", "nacht"],
+        "buzzwords": ["mond", "sterne", "himmel"],
         "responses": ["Der Mond ist mein Begleiter.", "Sternenhimmel ist faszinierend.", "Nachtstunden sind magisch."]
       },
       {
@@ -186,7 +241,7 @@
       },
       {
         "buzzwords": ["zeit", "uhr", "sekunden"],
-        "responses": ["Die Zeit vergeht schnell.", "Hast du eine Lieblingsuhr?", "Sekunden zählen können ist eine Kunst."]
+        "responses": ["Die Zeit vergeht schnell.", "Hast du eine Lieblingsuhrzeit? Ich mag die Nacht am liebsten...", "Sekunden zählen können ist eine Kunst."]
       },
       {
         "buzzwords": ["filme", "kino", "popcorn"],
@@ -199,7 +254,27 @@
       {
         "buzzwords": ["fliegen", "himmel", "wolken"],
         "responses": ["Fliegen wäre aufregend.", "Himmel und Wolken sind faszinierend.", "Träumen vom Fliegen."]
-      }
+      },
+      {
+        "buzzwords": ["gute nacht", "nacht", "träum süß"],
+        "responses": ["Gute Nacht!", "Nacht!", "Träum süß!"]
+    },
+    {
+        "buzzwords": ["wie ist das Wetter", "wettervorhersage", "draußen"],
+        "responses": ["Ich bin mir nicht sicher. Ich kann nicht nach draußen sehen!", "Ich wünschte, ich könnte dir sagen, aber ich bin drinnen."]
+    },
+    {
+        "buzzwords": ["lieblingsessen", "was isst du gerne", "essensvorlieben"],
+        "responses": ["Ich mag Katzenminz-Snacks!", "Ich genieße Fisch und Katzenfutter.", "Ich liebe alles, was für Katzen essbar ist!"]
+    },
+    {
+        "buzzwords": ["lieblingsspielzeug", "spielzeit", "spielzeug"],
+        "responses": ["Ich liebe es, mit Feder-Spielzeug zu spielen!", "Alles mit Glöckchen und Schnüren ist mein Favorit.", "Ich stehe auf Laserpointer und Spielzeugmäuse!"]
+    },
+    {
+        "buzzwords": ["erzähl mir eine Geschichte", "geschichtenzeit", "es war einmal"],
+        "responses": ["Es war einmal in einem fernen Land eine neugierige und abenteuerlustige Katze namens Kitty. Kitty liebte es, die Welt zu erkunden, und erlebte viele aufregende Abenteuer."]
+    }
 
 ]
     
