@@ -34,7 +34,7 @@ const StyledForm = styled.form`
 export default function ChatInput ({user, room, userAvatar, setTextAreaSize, setTextCoordinates, setTyping}:{setTextAreaSize:any, userAvatar: string, user:string, room:string, setTextCoordinates:any, setTyping:any}) {
     useEffect (()=> {
         const textarea = document.getElementById('textarea') as HTMLTextAreaElement;
-        const fontSizeInPixels = 7.8; // Set your font size in pixels
+        const fontSizeInPixels = 7.7; // Set your font size in pixels
         const paddingInPixels = 20; // Set your padding in pixels
         const contentWidth = textarea.clientWidth  - paddingInPixels;
       

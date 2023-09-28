@@ -77,6 +77,8 @@ const [userRooms, setUserRooms] = useState<string[]>();
   const [settings, setSettings] = useState<boolean>(false);
 const [userAvatar, setUserAvatar] = useState<string>("");
 const [activeRoom, setActiveRoom] = useState<string>();
+const [addRoom, setAddRoom] = useState(false)
+const [addFriend, setAddFriend] = useState(false)
   useEffect(() => {
     if (userFriends && user.email) {
       writeToFirestore(user.email, "friends", userFriends);
@@ -124,12 +126,14 @@ useEffect(() => {
 if (!userNick && user.email && user.displayName) return (
   <Introduction userEmail={user.email} userName={user.displayName} setNickName={setUserNick}/>
 )
+/*
 if (!userFriends && user.email) return (
   <FindFriends userEmail={user.email} setFriends={setUserFriends} friends={userFriends}/>
 )
 if (!userRooms) return (
   <CreateRoom user={user} setRooms={setUserRooms} rooms={userRooms}/>
 )
+*/
 if (!userAvatar) return (
   <ChooseAvatar handleChangeAvatar={setUserAvatar} avatar={userAvatar} setAvatar={setUserAvatar}/>
 )
@@ -139,15 +143,15 @@ if (!userAvatar) return (
   return (
       <MainDiv>
     <SettingsButton type="button" onClick = {()=>setSettings(prev => !prev)}><Image src="/settings.png" alt="settings" width={20} height={20}/></SettingsButton>
-     {settings && <Settings setSettings={setSettings} avatar={userAvatar} setAvatar={setUserAvatar} friends={userFriends} rooms={userRooms} user={user} setRooms={setUserRooms} setFriends={setUserFriends} />}
+     {settings && <Settings setAddFriend={setAddFriend} addFriend={addFriend} addRoom={addRoom} setAddRoom={setAddRoom} setSettings={setSettings} avatar={userAvatar} setAvatar={setUserAvatar} friends={userFriends} rooms={userRooms} user={user} setRooms={setUserRooms} setFriends={setUserFriends} />}
       <ProfileSection>
      
       <ProfileLists>
-      <FriendList friends={userFriends}/>
-      <RoomList rooms={userRooms} setActiveRoom={setActiveRoom}/>
+      <FriendList friends={userFriends} setSettings={setSettings} setAddFriends={setAddFriend}/>
+      <RoomList setSettings={setSettings} setAddRoom={setAddRoom} rooms={userRooms} setActiveRoom={setActiveRoom}/>
       </ProfileLists>
       </ProfileSection>
-      {activeRoom && userNick && <ShowRoom userNick={userNick} userAvatar={userAvatar} user={user} activeRoom={activeRoom}/>}
+      {activeRoom && userNick && <ShowRoom  userNick={userNick} userAvatar={userAvatar} user={user} activeRoom={activeRoom}/>}
       
     </MainDiv>
 
