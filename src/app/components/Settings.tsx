@@ -74,9 +74,9 @@ background-color:rgba(255,255,255,255.5);
 overflow-y: auto;
 `
 
-export function Settings({user, setRooms, setSettings, setFriends, friends, rooms, avatar, setAvatar}: {setSettings: any, user: any, setRooms: any, setFriends: any, friends: string[], rooms: string[] | undefined, avatar: string | undefined, setAvatar: any}): JSX.Element {
-const [addFriend, setAddFriend] = useState(false)
-const [addRoom, setAddRoom] = useState(false)
+export function Settings({user, setRooms, setSettings, setFriends, friends, rooms, avatar, setAvatar, setAddRoom, addRoom, addFriend, setAddFriend}: {addFriend: boolean, setAddFriend:any, setAddRoom:any, addRoom:boolean;setSettings: any, user: any, setRooms: any, setFriends: any, friends: string[], rooms: string[] | undefined, avatar: string | undefined, setAvatar: any}): JSX.Element {
+
+
 const [changeAvatar, setChangeAvatar] = useState(false)
 
 function handleChangeAvatar() {
@@ -85,12 +85,12 @@ function handleChangeAvatar() {
     setAddRoom(false)
 }
 function handleShowFriends() {
-    setAddFriend(prev => !prev)
+    setAddFriend((prev:boolean) => !prev)
     setAddRoom(false)
     setChangeAvatar(false)
 }
 function handleShowRoom() {
-    setAddRoom(prev => !prev)
+    setAddRoom((prev:boolean) => !prev)
     setAddFriend(false)
     setChangeAvatar(false)
 }

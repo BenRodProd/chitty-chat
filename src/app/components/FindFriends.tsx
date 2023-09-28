@@ -37,7 +37,7 @@ export default function FindFriends({
 
   useEffect(() => {
     getAllUserNicknames().then((data) => {
-      setAllUsers(data.map((user) => user));
+      setAllUsers(data.map((user) => user).filter((user) => user.email));
     });
   }, []);
 
@@ -62,8 +62,8 @@ export default function FindFriends({
 
   return (
     <FriendsDiv>
-      <h2>Add a friend to your friendlist.</h2>
-      <p>Choose someone to connect with:</p>
+      <h2>Füge einen Freund hinzu.</h2>
+      
       {allUsers.map((user:any, index) => (
         <FriendSelector onClick={() => handleAddFriend(user)} key={index}>
           {user.nick}

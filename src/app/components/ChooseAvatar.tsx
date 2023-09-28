@@ -1,5 +1,27 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
+import styled from "styled-components";
+
+const StyledImage = styled(Image)`
+border: 3px black solid;
+border-radius: 12px;
+
+`
+const StyledButton = styled.button`
+display:flex;
+background-color: #4CAF50;
+border: none;
+color: white;
+padding: 15px 32px;
+text-align: center;
+text-decoration: none;
+display: inline-block;
+font-size: 16px;
+margin: 4px 2px;
+cursor: pointer;
+border-radius: 12px;
+z-index:1;
+`
 
 export default function ChooseAvatar({ avatar, setAvatar, handleChangeAvatar }: { handleChangeAvatar: any, avatar: string; setAvatar: any }): JSX.Element {
   // Array of avatar image file names
@@ -46,9 +68,9 @@ function handleChooseAvatar() {
   return (
     <>
       <div>
-        <button onClick={handlePreviousAvatar}>&lt;--</button>
-        <Image width={200} height={200} src={shuffledAvatarImages[currentAvatarIndex]} onClick={()=>handleChooseAvatar()} alt="Avatar" />
-        <button onClick={handleNextAvatar}>--&gt;</button>
+        <StyledButton onClick={handlePreviousAvatar}>&lt;--</StyledButton>
+        <StyledImage width={200} height={200} src={shuffledAvatarImages[currentAvatarIndex]} onClick={()=>handleChooseAvatar()} alt="Avatar" />
+        <StyledButton onClick={handleNextAvatar}>--&gt;</StyledButton>
       </div>
     </>
   );
