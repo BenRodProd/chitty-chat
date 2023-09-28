@@ -73,7 +73,7 @@ overflow: hidden;
 export default function Main({ user }: { user: User}  ): JSX.Element {
   const [userNick, setUserNick] = useState<string>();
   const [userFriends, setUserFriends] = useState<string[]>([]);
-const [userRooms, setUserRooms] = useState<string[]>();
+const [userRooms, setUserRooms] = useState<string[]>([]);
   const [settings, setSettings] = useState<boolean>(false);
 const [userAvatar, setUserAvatar] = useState<string>("");
 const [activeRoom, setActiveRoom] = useState<string>();

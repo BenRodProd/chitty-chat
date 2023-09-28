@@ -34,7 +34,7 @@ border-radius: 12px;
 z-index: 2;
 width: 50%;
 user-select: none;
-
+overflow-y: auto;
 `
 
 const FriendTitle = styled.h3`
@@ -47,6 +47,7 @@ text-decoration: underline;
 ` 
 
 const StyledUl = styled.ul`
+
 display:flex;
   overflow-y:auto;
 `

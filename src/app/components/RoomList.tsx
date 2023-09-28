@@ -66,13 +66,13 @@ function handleRoomButtonClick() {
     
     return (
         <RoomListStyle>
-            <RoomTitle>your rooms:</RoomTitle>
+            <RoomTitle>Räume:</RoomTitle>
             
             <ul>
-            {rooms && rooms.length > 0 && rooms.map((room:string, index:number) => {
+            {rooms && rooms.length > 0 && rooms.map((room:string, index:number) => {                
                 return <StyledListItem onClick={() => handleChooseRoom(room)} key={index}>{room}</StyledListItem>
             })}
-            {!rooms || rooms.length === 0 && <StyledButton onClick={()=> handleRoomButtonClick()}>create of choose a room</StyledButton>}
+            {!rooms || rooms.length === 0 && <StyledButton onClick={()=> handleRoomButtonClick()}>Erstelle einen Raum</StyledButton>}
             </ul>
         </RoomListStyle>
     )

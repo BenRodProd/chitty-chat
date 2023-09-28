@@ -20,7 +20,7 @@ export default function KittyModel({ textAreaSize, animationCall, textCoordinate
   }
 useEffect(() => {
     if (typing) {
-      console.log(textAreaSize, textCoordinates)
+   
     const minRotationX = 1;
     const maxRotationX = -1;
    
@@ -101,7 +101,7 @@ const mappedRotationX = MathUtils.mapLinear(remainder, 0, lettersPerLine - 1, mi
     minYaw = -1
     maxYaw = 1
   }
-  console.log(minYaw, maxYaw)
+
     // Clamp the pitch and yaw angles within the defined limits
     pitchAngle = Math.max(minPitch, Math.min(maxPitch, pitchAngle));
     yawAngle = Math.max(minYaw, Math.min(maxYaw, yawAngle));

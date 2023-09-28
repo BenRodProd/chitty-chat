@@ -40,7 +40,7 @@ const [allRooms, setAllRooms] = useState<string[] | undefined>();
 useEffect(() => {
     getAllRooms().then(data => {
       // Erstelle ein Set mit eindeutigen Werten und konvertiere es dann zurück in ein Array
-      const uniqueRooms = [...new Set(data.flat())];
+      const uniqueRooms = [...new Set(data.flat())].filter((room: string) => room !== undefined);
       setAllRooms(uniqueRooms);
     });
   }, []);
@@ -53,33 +53,40 @@ useEffect(() => {
 
         // Write the room name to Firestore
         
-        // Update the rooms state with the new room name
-        if (!allRooms?.includes(roomName)){
-        setRooms((prevRooms: string[] | undefined) =>
-        prevRooms !== undefined ? [...prevRooms, roomName] : [roomName]
-        )
+        const trimmedRoom = roomName.trim(); // Remove leading and trailing white spaces
+    
+        if (!rooms?.includes(trimmedRoom) && trimmedRoom.length > 3) {
+            setRooms((prevRooms: string[] | undefined) =>
+                prevRooms !== undefined ? [...prevRooms, trimmedRoom] : [trimmedRoom]
+            );
+        }
     }
        
-    }
+    
 
-function handleChooseRoom(room: string) {
-    if (!rooms?.includes(room)) {
-    setRooms((prevRooms: string[] | undefined) => prevRooms !== undefined ? [...prevRooms, room] : [room])
-}
-}
+    function handleChooseRoom(room: string) {
+        const trimmedRoom = room.trim(); // Remove leading and trailing white spaces
+    
+        if (room && !rooms?.includes(trimmedRoom) && trimmedRoom.length > 3) {
+            setRooms((prevRooms: string[] | undefined) =>
+                prevRooms !== undefined ? [...prevRooms, trimmedRoom] : [trimmedRoom]
+            );
+        }
+    }
+   console.log(allRooms)
 
     return (
         <StyledRoomChoice>
         <h2>Create new Room</h2>
             <form onSubmit={(e) => handleCreateRoom(e, user)}>
-                <input type="text" max="20" placeholder="RoomName" name="roomname" />
+                <input type="text" maxLength={20} minLength={3} placeholder="RoomName" name="roomname" />
                 <button type="submit">OK</button>
             </form>
             <hr/>
             {allRooms && <h2>select a room to add:</h2>}
             <RoomList>
-            {allRooms && allRooms.map((room:string, index:number) => {
-                return <RoomSelector onClick = {() => handleChooseRoom(room)} key={index}>{room}</RoomSelector>
+            {allRooms && allRooms.length > 0 && allRooms[0] !== undefined && allRooms.map((room:string, index:number) => {
+                return <RoomSelector onClick = {() => handleChooseRoom(room)} key={index}>{room && room.trim().length > 3 && room}</RoomSelector>
             })}
             </RoomList>
 
