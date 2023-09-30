@@ -120,8 +120,16 @@
         "responses": ["Urlaub am Strand klingt toll!", "Ich liebe Reisen!", "Wohin möchtest du reisen?"]
       },
       {
-        "buzzwords": ["tricks", "kunststücke", "akrobatik"],
-        "responses": ["Ich kann viele Tricks!", "Welche Kunststücke magst du?", "Lass mich ein Kunststück zeigen!"]
+        "buzzwords": ["trick", "kunststück", "tricks"],
+        "responses": ["Ich kann viele Tricks!", "Lass mich ein Kunststück zeigen!"]
+      },
+      {
+        "buzzwords": ["cool"],
+        "responses": ["Total!"]
+      },
+      {
+        "buzzwords": ["was machst du"],
+        "responses": ["Meistens mach ich Miau!"]
       },
       {
         "buzzwords": ["freunde", "gesellschaft", "zusammen"],

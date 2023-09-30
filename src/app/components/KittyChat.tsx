@@ -2,7 +2,7 @@ import writeToChat from "@/service/writeChat";
 import { useEffect, useState } from "react";
 import { conversationData } from "../kittytalk/conversation";
 
-export default function KittyChat({ messages, setMessages, messageBoxRef, room }: { room: any, messages: any, setMessages: any, messageBoxRef: any }) {
+export default function KittyChat({ messages, setMessages, messageBoxRef, room, setAnimationCall }: { setAnimationCall:any, room: any, messages: any, setMessages: any, messageBoxRef: any }) {
   const [canKittyRespond, setCanKittyRespond] = useState(true);
   const [conversationState, setConversationState] = useState("ALL");
 
@@ -29,7 +29,15 @@ export default function KittyChat({ messages, setMessages, messageBoxRef, room }
               buzzwordMatched = true;
               const responses = conversation.responses;
               kittyResponse = responses[Math.floor(Math.random() * responses.length)];
-
+              if(cleanText.includes("kunststück") || cleanText.includes("trick")) {
+                setTimeout(() => {
+                  
+                  setAnimationCall("sit");
+                },800)
+                setTimeout(() => {
+                  setAnimationCall("follow");
+                },3000)
+              }
               if (conversation.NEXT) {
                 newState = conversation.NEXT;
               }
@@ -44,7 +52,7 @@ export default function KittyChat({ messages, setMessages, messageBoxRef, room }
       } else {
         for (const conversation of conversationData) {
           if (conversation.STATE === conversationState) {
-            let buzzwordMatched = false;
+            let buzzwordMatched:boolean = false;
 
             for (const buzzword of conversation.buzzwords) {
               const cleanBuzzword = buzzword.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").toLowerCase();
@@ -53,7 +61,7 @@ export default function KittyChat({ messages, setMessages, messageBoxRef, room }
                 buzzwordMatched = true;
                 const responses = conversation.responses;
                 kittyResponse = responses[Math.floor(Math.random() * responses.length)];
-
+                
                 if (conversation.NEXT) {
                   newState = conversation.NEXT;
                 }
