@@ -16,35 +16,40 @@ export default function KittyChat({ messages, setMessages, messageBoxRef, room }
       let newState = conversationState;
       const cleanText = latestMessage.text[0].replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").toLowerCase();
 
-      // Split the latest message into words
-      const words = cleanText.split(" ");
-
       if (conversationState === "ALL") {
         const responsesWithNoState = conversationData.filter((conversation) => !conversation.STATE);
 
-        for (const word of words) {
-          const matchingResponses = responsesWithNoState.filter((conversation) =>
-            conversation.buzzwords.some((buzzword) => word.includes(buzzword.toLowerCase()))
-          );
+        for (const conversation of responsesWithNoState) {
+          let buzzwordMatched = false;
 
-          if (matchingResponses.length > 0) {
-            const randomResponse = matchingResponses[Math.floor(Math.random() * matchingResponses.length)];
-            kittyResponse = randomResponse.responses[Math.floor(Math.random() * randomResponse.responses.length)];
+          for (const buzzword of conversation.buzzwords) {
+            const cleanBuzzword = buzzword.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").toLowerCase();
 
-            if (randomResponse.NEXT) {
-              newState = randomResponse.NEXT;
+            if (cleanText.includes(cleanBuzzword)) {
+              buzzwordMatched = true;
+              const responses = conversation.responses;
+              kittyResponse = responses[Math.floor(Math.random() * responses.length)];
+
+              if (conversation.NEXT) {
+                newState = conversation.NEXT;
+              }
+              break; // Exit the loop when a match is found
             }
-            break; // Exit the loop when a match is found
+          }
+
+          if (buzzwordMatched) {
+            break; // Exit the conversation loop when a match is found
           }
         }
       } else {
-        for (const word of words) {
-          for (const conversation of conversationData) {
+        for (const conversation of conversationData) {
+          if (conversation.STATE === conversationState) {
             let buzzwordMatched = false;
+
             for (const buzzword of conversation.buzzwords) {
               const cleanBuzzword = buzzword.replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").toLowerCase();
 
-              if (word.includes(cleanBuzzword) && (!conversation.STATE || conversation.STATE === conversationState)) {
+              if (cleanText.includes(cleanBuzzword)) {
                 buzzwordMatched = true;
                 const responses = conversation.responses;
                 kittyResponse = responses[Math.floor(Math.random() * responses.length)];
@@ -52,16 +57,13 @@ export default function KittyChat({ messages, setMessages, messageBoxRef, room }
                 if (conversation.NEXT) {
                   newState = conversation.NEXT;
                 }
-
-                break;
+                break; // Exit the loop when a match is found
               }
             }
+
             if (buzzwordMatched) {
               break; // Exit the conversation loop when a match is found
             }
-          }
-          if (kittyResponse) {
-            break; // Exit the word loop when a response is found
           }
         }
       }
@@ -72,7 +74,7 @@ export default function KittyChat({ messages, setMessages, messageBoxRef, room }
         );
         if (noiseResponses) {
           const responses = noiseResponses.responses;
-          kittyResponse = Math.random() < 0.1 ? "" : responses[Math.floor(Math.random() * responses.length)];
+          kittyResponse = Math.random() < 0.8 ? "SILENCIO" : responses[Math.floor(Math.random() * responses.length)];
         }
       }
 
@@ -91,6 +93,8 @@ export default function KittyChat({ messages, setMessages, messageBoxRef, room }
       }
     }
   }, [messages, canKittyRespond, room, conversationState]);
+
+
 
   return null;
 }

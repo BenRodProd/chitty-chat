@@ -101,8 +101,12 @@ export default function ShowRoom({ userNick, userAvatar, activeRoom, user }: { u
       const updatedMessages = [] as { id: string, [key: string]: any }[];
       querySnapshot.forEach((doc: QueryDocumentSnapshot) => {
         const data = doc.data();
-        updatedMessages.push({ id: doc.id, ...data });
+  
+          updatedMessages.push({ id: doc.id, ...data });
+      
+        
       });
+     
       setMessages(updatedMessages);
 
       // Scroll to the bottom of the MessageBox when new messages arrive
@@ -141,16 +145,22 @@ export default function ShowRoom({ userNick, userAvatar, activeRoom, user }: { u
     <ChatRoomStyle>
       <RoomHeader>{activeRoom}</RoomHeader>
       <MessageBox ref={messageBoxRef}>
-        {messages.map((message) => (
-        
-          <ChatBubble key={message.id} $isCurrentUser={message.user[0] === userNick ? "true" : "false"}>
-            <Image src={message.avatar[0]} width="50" height="50" alt="userAvatar" />
-            <ChatText>{message.text}</ChatText>
-              
-              <DisplayTime>{formatTimestamp(message.timestamp)}</DisplayTime>
-                      </ChatBubble>
-             
-        ))}
+      {messages
+  .filter(
+    (message) =>
+      message.text[0] !== 'SILENCIO' 
+  )
+  .map((message) => (
+    <ChatBubble
+      key={message.id}
+      $isCurrentUser={message.user[0] === userNick ? 'true' : 'false'}
+    >
+      <Image src={message.avatar[0]} width="50" height="50" alt="userAvatar" />
+      <ChatText>{message.text}</ChatText>
+      <DisplayTime>{formatTimestamp(message.timestamp)}</DisplayTime>
+    </ChatBubble>
+  ))}
+
       </MessageBox>
       <ChatInput setTextAreaSize={setTextAreaSize} setTyping = {setTyping} setTextCoordinates={setTextCoordinates} user={userNick} userAvatar={userAvatar} room={activeRoom} />
       <Kitty textAreaSize={textAreaSize} setAnimationCall={setKittyAnimation} typing={typing} animationCall={kittyAnimation} textCoordinates={textCoordinates} />
