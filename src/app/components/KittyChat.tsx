@@ -9,8 +9,8 @@ export default function KittyChat({ messages, setMessages, messageBoxRef, room, 
   useEffect(() => {
     const latestMessage = messages[messages.length - 1];
     const isKittyMessage =
-      latestMessage.user[0] === "Kitty" || latestMessage.avatar[0] === "/assets/kittyavatar.jpg";
-
+      latestMessage.user[0] === "kitty" || latestMessage.avatar[0] === "/assets/kittyavatar.jpg";
+    console.log(isKittyMessage)
     if (!isKittyMessage && canKittyRespond) {
       let kittyResponse = "";
       let newState = conversationState;
