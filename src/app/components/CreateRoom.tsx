@@ -43,7 +43,7 @@ useEffect(() => {
       const uniqueRooms = [...new Set(data.flat())].filter((room: string) => room !== undefined);
       setAllRooms(uniqueRooms);
     });
-  }, []);
+  }, [allRooms]);
 
    function handleCreateRoom(e: any, user: any) {
         e.preventDefault();
@@ -73,7 +73,7 @@ useEffect(() => {
             );
         }
     }
-   console.log(allRooms)
+
 
     return (
         <StyledRoomChoice>

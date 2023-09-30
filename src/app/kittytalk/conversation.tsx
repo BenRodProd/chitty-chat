@@ -1,4 +1,4 @@
- export const conversationData =
+ export const conversationDatas = (latestMessage:any) =>
  [
     {
         "buzzwords": ["noise"],
@@ -6,11 +6,15 @@
       },
       {
         "buzzwords": ["hello", "hallo", "hi", "hey", "hola"],
-        "responses": ["Kuckuck", "Hallo!", "Hi!", "Hey!", "Hola!"]
+        "responses": [`Kuckuck, ${latestMessage.user[0]}!`, `Hallo, ${latestMessage.user[0]}!`, `Hi ${latestMessage.user[0]}!`, `Hey ${latestMessage.user[0]}!`, `Hola, ${latestMessage.user[0]}!`]
       },
       {
         "buzzwords": ["tschüss", "bye", "ciao"],
-        "responses": ["Auf Wiedersehen", "Ciao, miau", "Tschöö mit Ö", "Ciao Kakao!"]
+        "responses": [`Auf Wiedersehen, ${latestMessage.user[0]}`, "Ciao, miau", "Tschöö mit Ö", "Ciao Kakao!"]
+      },
+      {
+        "buzzwords": ["wie heiße ich", "wie ich heiße"],
+        "responses": [`Du heißt ${latestMessage.user[0]}!`, `Ist doch klar! Du heißt doch ${latestMessage.user[0]}!`]
       },
       {
         
@@ -31,7 +35,7 @@
         "NEXT": "ALL"
       },
       {
-        "buzzwords": ["wie geht es", "alles klar?", "was geht"],
+        "buzzwords": ["wie geht es", "alles klar?", "was geht", "wie gehts"],
         "responses": ["Mir geht es gut! Und dir?", "Alles klar! Und bei Dir?", "Hunger... Sonst alles gut! Und bei dir?"],
         "NEXT": "WIEGEHTS"
       },
@@ -80,7 +84,7 @@
       },
       {
         "buzzwords": ["wie alt bist du", "dein alter"],
-        "responses": ["Ich bin zeitlos!", "Alter ist nur eine Zahl!", "Ich bin immer jung!"]
+        "responses": ["Ich bin ein kleines Kätzchen! Keine Ahnung, wie alt ich bin...", "Alter ist nur eine Zahl!", "Ich fühle mich jung!"]
       },
       {
         "buzzwords": ["katzengespräch", "plaudern", "unterhalten"],
@@ -269,7 +273,7 @@
     },
     {
         "buzzwords": ["wie ist das Wetter", "wettervorhersage", "draußen"],
-        "responses": ["Ich bin mir nicht sicher. Ich kann nicht nach draußen sehen!", "Ich wünschte, ich könnte dir sagen, aber ich bin drinnen."]
+        "responses": ["Ich bin mir nicht sicher. Ich kann nicht nach draußen sehen!", "Ich wünschte, ich könnte es dir sagen, aber ich bin drinnen."]
     },
     {
         "buzzwords": ["lieblingsessen", "was isst du gerne", "essensvorlieben"],
@@ -281,7 +285,7 @@
     },
     {
         "buzzwords": ["erzähl mir eine Geschichte", "geschichtenzeit", "es war einmal"],
-        "responses": ["Es war einmal in einem fernen Land eine neugierige und abenteuerlustige Katze namens Kitty. Kitty liebte es, die Welt zu erkunden, und erlebte viele aufregende Abenteuer."]
+        "responses": ["Es war einmal in einem fernen Land eine neugierige und abenteuerlustige Katze namens Kitty. Kitty liebte es, die Welt zu erkunden, und erlebte viele aufregende Abenteuer. Ende..."]
     }
 
 ]

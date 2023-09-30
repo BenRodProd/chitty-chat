@@ -1,16 +1,19 @@
 import writeToChat from "@/service/writeChat";
 import { useEffect, useState } from "react";
-import { conversationData } from "../kittytalk/conversation";
+import { conversationDatas } from "../kittytalk/conversation";
 
 export default function KittyChat({ messages, setMessages, messageBoxRef, room, setAnimationCall }: { setAnimationCall:any, room: any, messages: any, setMessages: any, messageBoxRef: any }) {
-  const [canKittyRespond, setCanKittyRespond] = useState(true);
+  const [canKittyRespond, setCanKittyRespond] = useState(false);
   const [conversationState, setConversationState] = useState("ALL");
-
   useEffect(() => {
+    setTimeout(() => {
+      setCanKittyRespond(true);
+    },500)
     const latestMessage = messages[messages.length - 1];
+    const conversationData = conversationDatas(latestMessage);
     const isKittyMessage =
       latestMessage.user[0] === "kitty" || latestMessage.avatar[0] === "/assets/kittyavatar.jpg";
-    console.log(isKittyMessage)
+   
     if (!isKittyMessage && canKittyRespond) {
       let kittyResponse = "";
       let newState = conversationState;
@@ -30,10 +33,11 @@ export default function KittyChat({ messages, setMessages, messageBoxRef, room, 
               const responses = conversation.responses;
               kittyResponse = responses[Math.floor(Math.random() * responses.length)];
               if(cleanText.includes("kunststück") || cleanText.includes("trick")) {
+                console.log("trick trigger")
                 setTimeout(() => {
                   
                   setAnimationCall("sit");
-                },800)
+                },1000)
                 setTimeout(() => {
                   setAnimationCall("follow");
                 },3000)
@@ -90,17 +94,17 @@ export default function KittyChat({ messages, setMessages, messageBoxRef, room, 
         setConversationState(newState);
       }
 
-      setCanKittyRespond(false);
-
-      setTimeout(() => {
-        setCanKittyRespond(true);
-      }, 3000);
-
+      
       if (kittyResponse) {
+        setCanKittyRespond(false);
+  
+        setTimeout(() => {
+          setCanKittyRespond(true);
+        }, 3000);
         writeToChat("kitty", "/assets/kittyavatar.jpg", room, kittyResponse);
       }
     }
-  }, [messages, canKittyRespond, room, conversationState]);
+  }, [messages]);
 
 
 
