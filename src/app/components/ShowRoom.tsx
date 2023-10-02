@@ -164,7 +164,7 @@ export default function ShowRoom({ userNick, userAvatar, activeRoom, user }: { u
       </MessageBox>
       <ChatInput setTextAreaSize={setTextAreaSize} setTyping = {setTyping} setTextCoordinates={setTextCoordinates} user={userNick} userAvatar={userAvatar} room={activeRoom} />
       <Kitty textAreaSize={textAreaSize} setAnimationCall={setKittyAnimation} typing={typing} animationCall={kittyAnimation} textCoordinates={textCoordinates} />
-      {messages.length > 0 && <KittyChat setAnimationCall={setKittyAnimation} messages={messages} setMessages={setMessages} messageBoxRef={messageBoxRef} room={activeRoom} />}
+      {messages.length > 0 && <KittyChat user={userNick} setAnimationCall={setKittyAnimation} messages={messages} setMessages={setMessages} messageBoxRef={messageBoxRef} room={activeRoom} />}
     </ChatRoomStyle>
   );
 }

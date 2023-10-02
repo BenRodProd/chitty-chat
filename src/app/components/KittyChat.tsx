@@ -2,7 +2,7 @@ import writeToChat from "@/service/writeChat";
 import { useEffect, useState } from "react";
 import { conversationDatas } from "../kittytalk/conversation";
 
-export default function KittyChat({ messages, setMessages, messageBoxRef, room, setAnimationCall }: { setAnimationCall:any, room: any, messages: any, setMessages: any, messageBoxRef: any }) {
+export default function KittyChat({ messages, setMessages, messageBoxRef, room, user, setAnimationCall }: { user: any, setAnimationCall:any, room: any, messages: any, setMessages: any, messageBoxRef: any }) {
   const [canKittyRespond, setCanKittyRespond] = useState(true);
   const [conversationState, setConversationState] = useState("ALL");
   useEffect(() => {
@@ -17,9 +17,9 @@ export default function KittyChat({ messages, setMessages, messageBoxRef, room, 
    
 
    
-        
-        if (!isKittyMessage && canKittyRespond && latestMessage) {
-          console.log("response trigger")
+ 
+        if (!isKittyMessage && canKittyRespond && latestMessage && latestMessage.user[0] === user) {
+          console.log("response trigger", "latestMessage", latestMessage.user[0], latestMessage.text[0], user);
       let kittyResponse = "";
       let newState = conversationState;
       const cleanText = latestMessage.text[0].replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").toLowerCase();
@@ -103,6 +103,10 @@ export default function KittyChat({ messages, setMessages, messageBoxRef, room, 
       if (kittyResponse&& !isKittyMessage) {
         
         writeToChat("kitty", "/assets/kittyavatar.jpg", room, kittyResponse);
+        setCanKittyRespond(false);
+        setTimeout(() => {
+          setCanKittyRespond(true);
+        },5000)
       }
     }
 
