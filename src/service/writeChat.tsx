@@ -21,7 +21,7 @@ export default async function writeToChat(username: string, userAvatar:string, r
         timestamp: serverTimestamp(), // Set the timestamp to the server time
         
       });
-      return username
+      
   } catch (error) {
     console.error('Error writing to Firestore:', error);
   }
