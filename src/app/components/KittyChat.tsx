@@ -3,15 +3,17 @@ import { useEffect, useState } from "react";
 import { conversationDatas } from "../kittytalk/conversation";
 
 export default function KittyChat({ messages, setMessages, messageBoxRef, room, setAnimationCall }: { setAnimationCall:any, room: any, messages: any, setMessages: any, messageBoxRef: any }) {
-  const [canKittyRespond, setCanKittyRespond] = useState(false);
+  const [canKittyRespond, setCanKittyRespond] = useState(true);
   const [conversationState, setConversationState] = useState("ALL");
   useEffect(() => {
 
     const latestMessage = messages[messages.length - 1];
     const conversationData = conversationDatas(latestMessage);
+    console.log(latestMessage)
     const isKittyMessage =
-      latestMessage.user[0] === "kitty" || latestMessage.avatar[0] === "/assets/kittyavatar.jpg";
+      latestMessage.user[0] === "kitty";
    
+      console.log("Kitty responded!", isKittyMessage, canKittyRespond)
     if (!isKittyMessage && canKittyRespond) {
       let kittyResponse = "";
       let newState = conversationState;
@@ -84,7 +86,7 @@ export default function KittyChat({ messages, setMessages, messageBoxRef, room, 
         );
         if (noiseResponses) {
           const responses = noiseResponses.responses;
-          kittyResponse = Math.random() < 0.8 ? "SILENCIO" : responses[Math.floor(Math.random() * responses.length)];
+          kittyResponse = Math.random() < 0.5 ? "SILENCIO" : responses[Math.floor(Math.random() * responses.length)];
         }
       }
 
@@ -103,7 +105,7 @@ export default function KittyChat({ messages, setMessages, messageBoxRef, room, 
       }
     }
   }, [messages]);
-
+console.log(conversationState)
 
 
   return null;
