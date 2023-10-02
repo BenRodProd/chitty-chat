@@ -6,9 +6,7 @@ export default function KittyChat({ messages, setMessages, messageBoxRef, room, 
   const [canKittyRespond, setCanKittyRespond] = useState(false);
   const [conversationState, setConversationState] = useState("ALL");
   useEffect(() => {
-    setTimeout(() => {
-      setCanKittyRespond(true);
-    },500)
+
     const latestMessage = messages[messages.length - 1];
     const conversationData = conversationDatas(latestMessage);
     const isKittyMessage =

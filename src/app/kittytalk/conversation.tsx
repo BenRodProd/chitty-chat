@@ -17,6 +17,11 @@
         "responses": [`Du heißt ${latestMessage.user[0]}!`, `Ist doch klar! Du heißt doch ${latestMessage.user[0]}!`]
       },
       {
+        "buzzwords": ["langweilig", "langeweile", "öde"],
+        "responses": ["Soll ich dir einen Witz erzählen?", "Möchtest du einen Witz hören?"],
+        "NEXT": "FRAGE-WITZ"
+      },
+      {
         
         "buzzwords": ["hunger", "essen", "fressen", "füttern"],
         "responses": ["Ich habe riesigen Hunger! Hast du was zu essen für mich?", "Hast du Katenfutter?", "Hast du einen Fisch für mich?"],

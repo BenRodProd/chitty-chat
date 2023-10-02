@@ -5,7 +5,7 @@ import styled from "styled-components";
 const StyledImage = styled(Image)`
 border: 3px black solid;
 border-radius: 12px;
-
+z-index:14;
 `
 const StyledButton = styled.button`
 display:flex;
@@ -20,7 +20,7 @@ font-size: 16px;
 margin: 4px 2px;
 cursor: pointer;
 border-radius: 12px;
-z-index:1;
+z-index:14;
 `
 
 export default function ChooseAvatar({ avatar, setAvatar, handleChangeAvatar }: { handleChangeAvatar: any, avatar: string; setAvatar: any }): JSX.Element {
