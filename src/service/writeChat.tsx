@@ -19,6 +19,7 @@ export default async function writeToChat(username: string, userAvatar:string, r
         user: [username],
         avatar: [userAvatar],
         timestamp: serverTimestamp(), // Set the timestamp to the server time
+        
       });
 
   } catch (error) {

@@ -149,8 +149,8 @@
         "responses": ["Ich kann viele Tricks!", "Lass mich ein Kunststück zeigen!"]
       },
       {
-        "buzzwords": ["cool"],
-        "responses": ["Total!"]
+        "buzzwords": ["cool", "omg", "wunderbar"],
+        "responses": ["Total!", "Find ich auch!"]
       },
       {
         "buzzwords": ["was machst du"],
