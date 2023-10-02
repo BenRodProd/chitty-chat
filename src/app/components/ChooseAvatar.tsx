@@ -3,9 +3,10 @@ import Image from "next/image";
 import styled from "styled-components";
 
 const StyledImage = styled(Image)`
+
 border: 3px black solid;
 border-radius: 12px;
-z-index:14;
+z-index:1114;
 `
 const StyledButton = styled.button`
 display:flex;
@@ -23,7 +24,16 @@ border-radius: 12px;
 z-index:14;
 `
 
-export default function ChooseAvatar({ avatar, setAvatar, handleChangeAvatar }: { handleChangeAvatar: any, avatar: string; setAvatar: any }): JSX.Element {
+const StyledDiv = styled.div`
+display:flex;
+align-items: center;
+justify-content: center;
+background-color: lightblue;
+z-index:10;
+`
+
+
+export default function ChooseAvatar({ avatar, setAvatar, handleChangeAvatar }: { handleChangeAvatar?: any, avatar: string; setAvatar: any }): JSX.Element {
   // Array of avatar image file names
   const avatarImages = Array.from({ length: 51 }, (_, i) => `/assets/avartar${i}.jpg`);
 
@@ -61,17 +71,19 @@ export default function ChooseAvatar({ avatar, setAvatar, handleChangeAvatar }: 
   };
 
 function handleChooseAvatar() {
+  
   setAvatar(shuffledAvatarImages[currentAvatarIndex]);
+
   handleChangeAvatar(false)
 }
 
   return (
     <>
-      <div>
+      <StyledDiv>
         <StyledButton onClick={handlePreviousAvatar}>&lt;--</StyledButton>
         <StyledImage width={200} height={200} src={shuffledAvatarImages[currentAvatarIndex]} onClick={()=>handleChooseAvatar()} alt="Avatar" />
         <StyledButton onClick={handleNextAvatar}>--&gt;</StyledButton>
-      </div>
+      </StyledDiv>
     </>
   );
 }

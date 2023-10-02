@@ -121,7 +121,7 @@ useEffect(() => {
 }
 },[user])
 
-
+console.log(userAvatar)
 
 if (!userNick && user.email && user.displayName) return (
   <Introduction userEmail={user.email} userName={user.displayName} setNickName={setUserNick}/>
@@ -135,7 +135,7 @@ if (!userRooms) return (
 )
 */
 if (!userAvatar) return (
-  <ChooseAvatar handleChangeAvatar={setUserAvatar} avatar={userAvatar} setAvatar={setUserAvatar}/>
+  <ChooseAvatar avatar={userAvatar} setAvatar={setUserAvatar}/>
 )
 
 

@@ -75,7 +75,7 @@ export default function FriendList({ friends, setSettings, setAddFriends }: {set
       const userData = (await getUserInfos(friendEmail)) as UserData | null;
       if (userData) {
         const { nick, avatar } = userData;
-        return { nickname: nick || "No Nickname", avatar: avatar || "No Avatar" };
+        return { nickname: nick || "No Nickname", avatar: avatar || "/assets/avartar34.jpg" };
       } else {
         // Handle the case where userData is null (user not found)
         // You can return a default value or handle it as needed.

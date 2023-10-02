@@ -15,7 +15,7 @@ align-items:center;
 justify-content:center;
 gap: 1rem;
 border-radius:12px;
-z-index:0;
+z-index:20;
 margin:auto;
 `
 const StyledButton = styled.button`
