@@ -102,11 +102,17 @@ export default function KittyChat({ messages, setMessages, messageBoxRef, room, 
       
       if (kittyResponse && !isKittyMessage) {
         
-        writeToChat("kitty", "/assets/kittyavatar.jpg", room, kittyResponse);
-        setCanKittyRespond(false);
-        setTimeout(() => {
-          setCanKittyRespond(true);
-        },2000)
+        setCanKittyRespond(false)
+       writeToChat("kitty", "/assets/kittyavatar.jpg", room, kittyResponse).then ((data) => {
+        if (data === user) {
+          
+         setCanKittyRespond(true);
+        }
+       })
+          
+        
+        //setMessages([...messages, { user: ["kitty"], text: [kittyResponse], avatar: ["/assets/kittyavatar.jpg"] }]);
+      
       }
     }
 
