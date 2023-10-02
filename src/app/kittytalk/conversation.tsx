@@ -17,7 +17,7 @@
         "responses": [`Du heißt ${latestMessage.user[0]}!`, `Ist doch klar! Du heißt doch ${latestMessage.user[0]}!`]
       },
       {
-        "buzzwords": ["🐟"],
+        "buzzwords": ["🐟", "🐠"],
         "responses": [`LECKER FISCH!`, `MMMhhh... Fisch... Lecker!!`]
       },
       {
