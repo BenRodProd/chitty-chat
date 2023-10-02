@@ -100,13 +100,13 @@ export default function KittyChat({ messages, setMessages, messageBoxRef, room, 
       }
       
       
-      if (kittyResponse&& !isKittyMessage) {
+      if (kittyResponse && !isKittyMessage) {
         
         writeToChat("kitty", "/assets/kittyavatar.jpg", room, kittyResponse);
         setCanKittyRespond(false);
         setTimeout(() => {
           setCanKittyRespond(true);
-        },5000)
+        },2000)
       }
     }
 

@@ -68,7 +68,7 @@
       },
       {
         "STATE": "WIEGEHTS",
-        "buzzwords": ["gut", "läuft", "ok", "spitze"],
+        "buzzwords": ["gut", "läuft", "ok", "spitze", "auch"],
         "responses": ["Das ist super!", "Schön!", "Sehr gut..."],
         "NEXT": "ALL"
       },
