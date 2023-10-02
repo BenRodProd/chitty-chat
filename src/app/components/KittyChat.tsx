@@ -6,17 +6,19 @@ export default function KittyChat({ messages, setMessages, messageBoxRef, room, 
   const [canKittyRespond, setCanKittyRespond] = useState(true);
   const [conversationState, setConversationState] = useState("ALL");
   useEffect(() => {
-
-    const latestMessage = messages[messages.length - 1];
-    const conversationData = conversationDatas(latestMessage);
-    console.log(latestMessage)
-    const isKittyMessage =
-      latestMessage.user[0] === "kitty";
+    
+      
+      const latestMessage = messages[messages.length - 1];
+      const conversationData = conversationDatas(latestMessage);
+      
+      const isKittyMessage =
+        latestMessage.user[0] === "kitty";
+     
    
-      console.log("Kitty responded!", isKittyMessage, canKittyRespond)
-      setTimeout(() => {
+
+   
         
-        if (!isKittyMessage && canKittyRespond) {
+        if (!isKittyMessage && canKittyRespond && latestMessage) {
           console.log("response trigger")
       let kittyResponse = "";
       let newState = conversationState;
@@ -103,7 +105,7 @@ export default function KittyChat({ messages, setMessages, messageBoxRef, room, 
         writeToChat("kitty", "/assets/kittyavatar.jpg", room, kittyResponse);
       }
     }
-  }, 3000);
+
   }, [messages]);
 
 

@@ -5,6 +5,14 @@
         "responses": ["Miau?", "Schnurr!", "Miau!", "Worüber wird hier geredet?", "Häh?"]
       },
       {
+        "buzzwords": ["😭", "😢"],
+        "responses": ["Ohhh.. nicht traurig sein!"]
+      },
+      {
+        "buzzwords": ["😀", "😄", "😁", "🐱"],
+        "responses": ["🐱"]
+      },
+      {
         "buzzwords": ["hello", "hallo", "hi", "hey", "hola"],
         "responses": [`Kuckuck, ${latestMessage.user[0]}!`, `Hallo, ${latestMessage.user[0]}!`, `Hi ${latestMessage.user[0]}!`, `Hey ${latestMessage.user[0]}!`, `Hola, ${latestMessage.user[0]}!`]
       },
