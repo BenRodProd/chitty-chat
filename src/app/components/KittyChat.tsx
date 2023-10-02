@@ -15,6 +15,7 @@ export default function KittyChat({ messages, setMessages, messageBoxRef, room, 
    
       console.log("Kitty responded!", isKittyMessage, canKittyRespond)
     if (!isKittyMessage && canKittyRespond) {
+      console.log("response trigger")
       let kittyResponse = "";
       let newState = conversationState;
       const cleanText = latestMessage.text[0].replace(/[.,\/#!$%\^&\*;:{}=\-_`~()]/g, "").toLowerCase();
@@ -96,16 +97,12 @@ export default function KittyChat({ messages, setMessages, messageBoxRef, room, 
 
       
       if (kittyResponse) {
-        setCanKittyRespond(false);
-  
-        setTimeout(() => {
-          setCanKittyRespond(true);
-        }, 3000);
+        
         writeToChat("kitty", "/assets/kittyavatar.jpg", room, kittyResponse);
       }
     }
   }, [messages]);
-console.log(conversationState)
+
 
 
   return null;
