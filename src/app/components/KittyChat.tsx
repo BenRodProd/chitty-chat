@@ -98,7 +98,7 @@ export default function KittyChat({ messages, setMessages, messageBoxRef, room, 
       }
       
       
-      if (kittyResponse) {
+      if (kittyResponse&& !isKittyMessage) {
         
         writeToChat("kitty", "/assets/kittyavatar.jpg", room, kittyResponse);
       }

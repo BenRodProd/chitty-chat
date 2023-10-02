@@ -12,7 +12,7 @@ export default async function writeToChat(username: string, userAvatar:string, r
     const docSnapshot = await getDoc(userDocRef);
 
     // Document doesn't exist, create a new one
-   
+    
       await setDoc(userDocRef, {
         room: [room],
         text: [text],
