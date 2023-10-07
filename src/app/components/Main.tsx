@@ -21,7 +21,7 @@ flex-direction: column;
 align-items: center;
 justify-content: center;
 width: 100%;
-height:20%;
+
 align-self: flex-end;
 background-color: aliceblue;
 
@@ -58,6 +58,7 @@ background-color: lightblue;
 border: 3px black solid;
 border-radius: 12px;
 user-select: none;
+min-height:100px;
 `
 
 const MainDiv = styled.div`
@@ -121,7 +122,6 @@ useEffect(() => {
 }
 },[user])
 
-console.log(userAvatar)
 
 if (!userNick && user.email && user.displayName) return (
   <Introduction userEmail={user.email} userName={user.displayName} setNickName={setUserNick}/>

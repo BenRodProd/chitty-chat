@@ -17,7 +17,6 @@ text-decoration: none;
 display: inline-block;
 font-size: 12px;
 margin: 5px;
-margin-top:1.5rem;
 cursor: pointer;
 border-radius: 12px;
 z-index:15;
@@ -34,13 +33,15 @@ border-radius: 12px;
 z-index: 2;
 width: 50%;
 user-select: none;
-overflow-y: auto;
+overflow-x: auto;
+
+height:100%;
 `
 
 const FriendTitle = styled.h3`
 display:flex;
-position:absolute;
-top:0;
+
+
 text-align: center;
 justify-self: flex-start;
 text-decoration: underline;
@@ -48,8 +49,6 @@ text-decoration: underline;
 
 const StyledUl = styled.ul`
 
-display:flex;
-  overflow-y:auto;
 `
 const StyledButton = styled.button`
 display:flex;

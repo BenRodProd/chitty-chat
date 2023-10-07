@@ -39,7 +39,7 @@ export default function KittyChat({ messages, setMessages, messageBoxRef, room, 
               const responses = conversation.responses;
               kittyResponse = responses[Math.floor(Math.random() * responses.length)];
               if(cleanText.includes("kunststück") || cleanText.includes("trick")) {
-                console.log("trick trigger")
+              
                 setTimeout(() => {
                   
                   setAnimationCall("sit");

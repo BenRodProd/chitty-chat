@@ -25,7 +25,8 @@ const ChatBubble = styled.div<{ $isCurrentUser: string }>`
 `
 
 const ChatText = styled.p`
-width:90%;
+display:inline-block;
+width:70%;
     word-wrap: break-word;
   overflow-wrap: break-word;
   white-space: pre-wrap;
