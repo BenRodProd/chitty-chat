@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 const FriendsDiv = styled.div`
   display: flex;
+  height: 100%;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -57,8 +58,7 @@ export default function FindFriends({
       // Optionally, you can also update the database here if needed
       writeToFirestore(userEmail, "friends", updatedFriends);
     }
-  
-  }
+   }
 
   return (
     <FriendsDiv>

@@ -73,8 +73,9 @@ export default function ChooseAvatar({ avatar, setAvatar, handleChangeAvatar }: 
 function handleChooseAvatar() {
   
   setAvatar(shuffledAvatarImages[currentAvatarIndex]);
-
+  if (handleChangeAvatar) {
   handleChangeAvatar(false)
+}
 }
 
   return (

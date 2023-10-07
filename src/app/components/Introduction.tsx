@@ -1,3 +1,5 @@
+import { useState } from 'react';
+import getAllUserNicknames from '@/service/getAllUsers';
 import saveToDatabase from '@/service/writeUserInfo';
 import styled from 'styled-components';
 
@@ -46,13 +48,21 @@ const StyledInput = styled.input`
 `
 
 export default function Introduction({userEmail, userName, setNickName} : {userEmail: string, userName: string, setNickName: any}): JSX.Element {
-  
+  const [alertMessage, setAlertMessage] = useState("")
    async function handleNewNickName(e: any, userEmail: string) {
         e.preventDefault();
-      
-        await setNickName(e.target.nickname.value)
-        await saveToDatabase(userEmail, "nick", e.target.nickname.value)
-        saveToDatabase(userEmail, "email", userEmail)
+        await getAllUserNicknames().then (async (data) => {
+          
+            const allNicks = data.map((nick) => nick.nick)
+            if (allNicks.includes(e.target.nickname.value)) {
+                setAlertMessage("This nickname is already taken")
+            } else {
+                await setNickName(e.target.nickname.value)
+                await saveToDatabase(userEmail, "nick", e.target.nickname.value)
+                saveToDatabase(userEmail, "email", userEmail)
+
+            }
+        })
 
     }
     return (
@@ -61,6 +71,7 @@ export default function Introduction({userEmail, userName, setNickName} : {userE
             <h2>Hallo {userName}, please choose a Nickname:</h2>
             <form onSubmit={(e)=> handleNewNickName(e, userEmail)}>
                 <StyledInput type="text" placeholder="Nickname" name="nickname"/>
+                <p>{alertMessage}</p>
                 <StyledButton type="submit">OK</StyledButton>
             </form>
         </IntroDiv>
