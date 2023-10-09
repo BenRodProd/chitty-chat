@@ -9,4 +9,5 @@ export interface User {
     avatar: string;
     friends: string[];
     rooms: string[];
+    activeRoom?: string;
   }

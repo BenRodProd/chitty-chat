@@ -74,7 +74,7 @@ background-color:rgba(255,255,255,255.5);
 overflow-y: auto;
 `
 
-export function Settings({user, setRooms, setSettings, setFriends, friends, rooms, avatar, setAvatar, setAddRoom, addRoom, addFriend, setAddFriend}: {addFriend: boolean, setAddFriend:any, setAddRoom:any, addRoom:boolean;setSettings: any, user: any, setRooms: any, setFriends: any, friends: string[], rooms: string[] | undefined, avatar: string | undefined, setAvatar: any}): JSX.Element {
+export function Settings({setActiveRoom, user, setRooms, setSettings, setFriends, friends, rooms, avatar, setAvatar, setAddRoom, addRoom, addFriend, setAddFriend}: {setActiveRoom:any, addFriend: boolean, setAddFriend:any, setAddRoom:any, addRoom:boolean;setSettings: any, user: any, setRooms: any, setFriends: any, friends: string[], rooms: string[] | undefined, avatar: string | undefined, setAvatar: any}): JSX.Element {
 
 
 const [changeAvatar, setChangeAvatar] = useState(false)
@@ -105,7 +105,7 @@ function handleShowRoom() {
     <StyledButton type="button" onClick={() => handleShowFriends()}>Add Friend</StyledButton>
     {addFriend && <FindFriends friends={friends} userEmail={user.email} setFriends={setFriends}/>}
     <StyledButton type="button" onClick={() => handleShowRoom()}>Add Room</StyledButton>
-    {addRoom && <CreateRoom rooms={rooms} user={user} setRooms={setRooms}/>}
+    {addRoom && <CreateRoom setActiveRoom={setActiveRoom} rooms={rooms} user={user} setRooms={setRooms}/>}
     <StyledButton type="button" onClick={() => handleChangeAvatar()}>Change Avatar</StyledButton>
     {changeAvatar && avatar && <ChooseAvatar avatar={avatar} setAvatar={setAvatar} handleChangeAvatar={handleChangeAvatar}/>}
     <StyledButton type="button" onClick={() => auth.signOut()}>Logout</StyledButton>

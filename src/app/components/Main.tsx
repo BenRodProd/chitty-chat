@@ -3,9 +3,7 @@ import { User } from '../types/types';
 import getUserInfos from '@/service/getUserInfo';
 import { useEffect, useState } from 'react';
 import Introduction from './Introduction';
-import FindFriends from './FindFriends';
 import FriendList from './FriendList';
-import CreateRoom from './CreateRoom';
 import RoomList from './RoomList';
 import { Settings } from './Settings';
 import writeToFirestore from '@/service/writeUserInfo';
@@ -13,6 +11,7 @@ import ChooseAvatar from './ChooseAvatar';
 import ShowRoom from './ShowRoom';
 import Image from 'next/image';
 import styled from 'styled-components';
+import SplashScreen from './SplashScreen';
 
 const ProfileSection = styled.div`
 display: flex;
@@ -80,6 +79,14 @@ const [userAvatar, setUserAvatar] = useState<string>("");
 const [activeRoom, setActiveRoom] = useState<string>();
 const [addRoom, setAddRoom] = useState(false)
 const [addFriend, setAddFriend] = useState(false)
+const [splashScreenActive, setSplashScreenActive] = useState(true)
+
+useEffect(() => {
+  setTimeout(() => {
+  setSplashScreenActive(false)
+}, 3000)
+},[])
+
   useEffect(() => {
     if (userFriends && user.email) {
       writeToFirestore(user.email, "friends", userFriends);
@@ -117,13 +124,16 @@ useEffect(() => {
     if (data && data.rooms) {
       setUserRooms(data.rooms)
     }
+    if (data && data.activeRoom) {
+      setActiveRoom(data.activeRoom)
+    }
 
   })
 }
 },[user])
 
 
-if (!userNick && user.email && user.displayName) return (
+if (!userNick && user.email && user.displayName && !splashScreenActive) return (
   <Introduction userEmail={user.email} userName={user.displayName} setNickName={setUserNick}/>
 )
 /*
@@ -134,21 +144,22 @@ if (!userRooms) return (
   <CreateRoom user={user} setRooms={setUserRooms} rooms={userRooms}/>
 )
 */
-if (!userAvatar) return (
+if (!userAvatar && !splashScreenActive) return (
   <ChooseAvatar avatar={userAvatar} setAvatar={setUserAvatar}/>
 )
 
 
 
   return (
-      <MainDiv>
+    <MainDiv>
+        {splashScreenActive && <SplashScreen/>} 
     <SettingsButton type="button" onClick = {()=>setSettings(prev => !prev)}><Image src="/settings.png" alt="settings" width={20} height={20}/></SettingsButton>
-     {settings && <Settings setAddFriend={setAddFriend} addFriend={addFriend} addRoom={addRoom} setAddRoom={setAddRoom} setSettings={setSettings} avatar={userAvatar} setAvatar={setUserAvatar} friends={userFriends} rooms={userRooms} user={user} setRooms={setUserRooms} setFriends={setUserFriends} />}
+     {settings && <Settings setActiveRoom={setActiveRoom} setAddFriend={setAddFriend} addFriend={addFriend} addRoom={addRoom} setAddRoom={setAddRoom} setSettings={setSettings} avatar={userAvatar} setAvatar={setUserAvatar} friends={userFriends} rooms={userRooms} user={user} setRooms={setUserRooms} setFriends={setUserFriends} />}
       <ProfileSection>
      
       <ProfileLists>
       <FriendList friends={userFriends} setSettings={setSettings} setAddFriends={setAddFriend}/>
-      <RoomList setSettings={setSettings} setAddRoom={setAddRoom} rooms={userRooms} setActiveRoom={setActiveRoom}/>
+      <RoomList user={user} setSettings={setSettings} setAddRoom={setAddRoom} rooms={userRooms} setActiveRoom={setActiveRoom}/>
       </ProfileLists>
       </ProfileSection>
       {activeRoom && userNick && <ShowRoom  userNick={userNick} userAvatar={userAvatar} user={user} activeRoom={activeRoom}/>}

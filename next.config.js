@@ -11,6 +11,19 @@ const nextConfig = {
         APPID: process.env.APPID,
         MEASUREMENTID: process.env.MEASUREMENTID,
         OPENAIKEY: process.env.OPENAIKEY
+      },
+      async headers() {
+        return [
+          {
+            source: "/(.*)",
+            headers: [
+              {
+                key: "Access-Origin-Opener-Policy",
+                value: "same-origin allow-popups",
+              },
+            ],
+          },
+        ];
       }
 }
 

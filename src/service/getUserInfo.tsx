@@ -13,7 +13,8 @@ async function getUserInfos(userEmail : string): Promise<UserData | null>  {
       const friends = userData.friends; 
       const rooms = userData.rooms;
       const avatar= userData.avatar;
-      return { nick, friends, rooms, avatar };
+      const activeRoom = userData.activeRoom;
+      return { nick, friends, rooms, avatar, activeRoom };
     } else {
       return null; // Return null if the user's document is not found
     }

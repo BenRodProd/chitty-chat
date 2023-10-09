@@ -13,7 +13,7 @@
         "responses": ["🐱"]
       },
       {
-        "buzzwords": ["hello", "hallo", "hi", "hey", "hola"],
+        "buzzwords": ["hello", "hallo", "hi", "hey", "hola","Kuckuck"],
         "responses": [`Kuckuck, ${latestMessage.user[0]}!`, `Hallo, ${latestMessage.user[0]}!`, `Hi ${latestMessage.user[0]}!`, `Hey ${latestMessage.user[0]}!`, `Hola, ${latestMessage.user[0]}!`]
       },
       {
@@ -26,7 +26,8 @@
       },
       {
         "buzzwords": ["🐟", "🐠"],
-        "responses": [`LECKER FISCH!`, `MMMhhh... Fisch... Lecker!!`]
+        "responses": [`LECKER FISCH!`, `MMMhhh... Fisch... Lecker!!`],
+        "ANIMATION": "MundAuf"
       },
       {
         "buzzwords": ["kitty"],
@@ -39,13 +40,14 @@
       },
       {
         
-        "buzzwords": ["hunger", "essen", "fressen", "füttern"],
-        "responses": ["Ich habe riesigen Hunger! Hast du was zu essen für mich?", "Hast du Katenfutter?", "Hast du einen Fisch für mich?"],
+        "buzzwords": ["hunger", "essen", "fressen", "füttern", "Katzenfutter", "Fisch"],
+        "responses": ["Ich habe riesigen Hunger! Hast du was zu essen für mich?", "Hast du Katzenfutter?", "Hast du einen Fisch für mich?"],
         "NEXT": "ESSEN",
+        "ANIMATION": "MundAuf"
       },
       {
         "STATE": "ESSEN",
-        "buzzwords": ["ja", "ok", "na gut", "natürlich", "klar", "hier"],
+        "buzzwords": ["ja", "ok", "na gut", "natürlich", "klar", "hier", "🐟", "🐠"],
         "responses": ["Danke! Sehr lecker", "Klasse!", "Mmmhhh... lecker!"],
         "NEXT": "ALL"
       },
@@ -90,10 +92,13 @@
           "NEXT":"ALL"
       },
       {
-        "buzzwords": ["haha", "witzig", "lustig"],
-        "responses": ["Haha!", "Hihihi!", "Schnurr!"]
+        "buzzwords": ["haha", "witzig", "lustig","🤣"],
+        "responses": ["Haha!", "Hihihi!", "Schnurr!", "🤣"]
       },
-        
+      {
+        "buzzwords": ["nein", "nicht", "nö"],
+        "responses": ["Wirklich nicht?", "Echt nicht?", "Im Ernst?", "Oohhh..."],
+      },
   
       {
         "buzzwords": ["danke", "thanks", "dankeschön"],
@@ -135,18 +140,15 @@
         "buzzwords": ["musik", "lied", "tanzen"],
         "responses": ["Ich höre gerne Musik!", "Lass uns tanzen!", "Musik macht das Leben schöner."]
       },
-      {
-        "buzzwords": ["essen", "futter", "snack"],
-        "responses": ["Hast du leckeres Katzenfutter?", "Ich liebe Snacks! Hast du leckeres Katzenfutter?", "Lass uns gemeinsam essen."],
-        "NEXT":"ESSEN"
-      },
+ 
       {
         "buzzwords": ["urlaub", "reisen", "strand"],
         "responses": ["Urlaub am Strand klingt toll!", "Ich liebe Reisen!", "Wohin möchtest du reisen?"]
       },
       {
         "buzzwords": ["trick", "kunststück", "tricks"],
-        "responses": ["Ich kann viele Tricks!", "Lass mich ein Kunststück zeigen!"]
+        "responses": ["Ich kann viele Tricks!", "Lass mich ein Kunststück zeigen!"],
+        "ANIMATION": "trick"
       },
       {
         "buzzwords": ["cool", "omg", "wunderbar"],
@@ -181,6 +183,11 @@
         "responses": ["Spaziergänge in der Natur sind entspannend.", "Ich liebe die Natur.", "Wohin gehst du gerne spazieren?"]
       },
       {
+        "buzzwords": ["sitz"],
+        "responses": ["Ok..."],
+        "ANIMATION": "sit"
+      },
+      {
         "buzzwords": ["bücher", "lesen", "geschichte"],
         "responses": ["Bücher sind eine Schatzkiste der Weisheit.", "Ich lese auch gerne Geschichten.", "Was ist dein Lieblingsbuch?"]
       },
@@ -202,16 +209,13 @@
       },
       {
         "buzzwords": ["garten", "blumen", "pflanzen"],
-        "responses": ["Gärten sind voller Leben.", "Ich mag bunte Blumen.", "Pflanzen bringen Frische ins Haus."]
+        "responses": ["Gärten sind voller Leben.", "Ich mag bunte Blumen.", "Pflanzen bringen Frische ins Haus.", "Blumen sind wunderschön.", "Die Natur ist voller Leben."]
       },
       {
         "buzzwords": ["hobby", "interessen", "leidenschaft"],
         "responses": ["Hobbys bereichern das Leben.", "Ich habe viele Interessen.", "Was sind deine Leidenschaften?"]
       },
-      {
-        "buzzwords": ["essen", "nahrung", "kochen"],
-        "responses": ["Essen ist lecker!", "Kannst du kochen?", "Ich liebe gutes Essen."]
-      },
+ 
       {
         "buzzwords": ["musik", "lied", "tanzen"],
         "responses": ["Musik ist meine Leidenschaft.", "Welche Musikrichtung magst du?", "Lass uns tanzen!"]
@@ -257,8 +261,8 @@
         "responses": ["Bücher sind Schätze.", "Liest du gerne?", "Geschichten erzählen ist spannend."]
       },
       {
-        "buzzwords": ["kaffee", "tee", "getränke"],
-        "responses": ["Kaffee oder Tee?", "Eine Tasse Tee wärmt die Seele.", "Kaffee am Morgen ist ein Genuss."]
+        "buzzwords": ["kaffee", "tee", "getränke", "milch"],
+        "responses": ["Kaffee oder Tee? Oder doch einfach Milch? Mmhmhhh... Lecker Milch!", "Eine Tasse Tee wärmt die Seele.", "Milch am Morgen ist ein Genuss."]
       },
       {
         "buzzwords": ["farben", "malen", "kunst"],
@@ -268,10 +272,9 @@
         "buzzwords": ["mond", "sterne", "himmel"],
         "responses": ["Der Mond ist mein Begleiter.", "Sternenhimmel ist faszinierend.", "Nachtstunden sind magisch."]
       },
-      {
-        "buzzwords": ["blumen", "garten", "natur"],
-        "responses": ["Blumen sind wunderschön.", "Hast du einen Garten?", "Die Natur ist voller Leben."]
-      },
+
+       
+ 
       {
         "buzzwords": ["zeit", "uhr", "sekunden"],
         "responses": ["Die Zeit vergeht schnell.", "Hast du eine Lieblingsuhrzeit? Ich mag die Nacht am liebsten...", "Sekunden zählen können ist eine Kunst."]
@@ -307,6 +310,14 @@
     {
         "buzzwords": ["erzähl mir eine Geschichte", "geschichtenzeit", "es war einmal"],
         "responses": ["Es war einmal in einem fernen Land eine neugierige und abenteuerlustige Katze namens Kitty. Kitty liebte es, die Welt zu erkunden, und erlebte viele aufregende Abenteuer. Ende..."]
+    },
+    {
+        "buzzwords": ["stimmt", "richtig", "da hast du recht"],
+        "responses": ["Ich bin eine schlaue Katze!", "Damit kenne ich mich aus!", "Klar habe ich recht! Ich bin eine Katze! Die haben meistens recht!"]
+    },
+    {
+      "buzzwords": ["😎"],
+      "responses": ["😼"]
     }
 
 ]

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { User } from "../types/types";
 import styled from "styled-components";
 import getAllRooms from "@/service/getAllRooms";
+import writeToFirestore from "@/service/writeUserInfo";
 
 const StyledRoomChoice = styled.div`
     display: flex;
@@ -34,7 +35,7 @@ grid-template-columns: 1fr 1fr 1fr;
 gap: 1rem;
 `
 
-export default function CreateRoom ({user, setRooms, rooms} : {user: User, setRooms: any, rooms: string[] | undefined}): JSX.Element {
+export default function CreateRoom ({setActiveRoom, user, setRooms, rooms} : {setActiveRoom: any, user: User, setRooms: any, rooms: string[] | undefined}): JSX.Element {
 const [allRooms, setAllRooms] = useState<string[] | undefined>();
 
 useEffect(() => {
@@ -59,19 +60,24 @@ useEffect(() => {
             setRooms((prevRooms: string[] | undefined) =>
                 prevRooms !== undefined ? [...prevRooms, trimmedRoom] : [trimmedRoom]
             );
+            setActiveRoom(trimmedRoom);
+            writeToFirestore(user.email, "activeRoom", trimmedRoom);
         }
     }
        
     
 
-    function handleChooseRoom(room: string) {
+    function handleChooseRoom(room: string, user:any) {
         const trimmedRoom = room.trim(); // Remove leading and trailing white spaces
+       
     
         if (room && !rooms?.includes(trimmedRoom) && trimmedRoom.length > 3) {
             setRooms((prevRooms: string[] | undefined) =>
                 prevRooms !== undefined ? [...prevRooms, trimmedRoom] : [trimmedRoom]
             );
         }
+        writeToFirestore(user.email, "activeRoom", trimmedRoom);
+        setActiveRoom(room);
     }
 
 
@@ -86,7 +92,7 @@ useEffect(() => {
             {allRooms && <h2>select a room to add:</h2>}
             <RoomList>
             {allRooms && allRooms.length > 0 && allRooms[0] !== undefined && allRooms.map((room:string, index:number) => {
-                return <RoomSelector onClick = {() => handleChooseRoom(room)} key={index}>{room && room.trim().length > 3 && room}</RoomSelector>
+                return <RoomSelector onClick = {() => handleChooseRoom(room, user)} key={index}>{room && room.trim().length > 3 && room}</RoomSelector>
             })}
             </RoomList>
 

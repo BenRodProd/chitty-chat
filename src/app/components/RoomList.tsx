@@ -1,3 +1,4 @@
+import writeToFirestore from "@/service/writeUserInfo"
 import styled from "styled-components"
 
 const StyledListItem = styled.li`
@@ -62,9 +63,9 @@ const StyledUL = styled.ul`
     margin-top:1rem;
 `
 
-export default function RoomList ({rooms, setActiveRoom, setSettings, setAddRoom}:{setAddRoom: any, rooms: string[] | undefined, setActiveRoom:any, setSettings:any}): JSX.Element {
+export default function RoomList ({rooms, setActiveRoom, setSettings, setAddRoom, user}:{user:any, setAddRoom: any, rooms: string[] | undefined, setActiveRoom:any, setSettings:any}): JSX.Element {
 function handleChooseRoom (room: string) {
-
+    writeToFirestore(user.email, "activeRoom", room);
     setActiveRoom(room)
 }
 
