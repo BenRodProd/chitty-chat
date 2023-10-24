@@ -70,6 +70,17 @@ overflow: hidden;
 
 `
 
+const AvatarDiv = styled.div`
+display:flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+width: 100%;
+height: 100%;
+align-self: flex-end;
+background-color: lightblue;
+`
+
 export default function Main({ user }: { user: User}  ): JSX.Element {
   const [userNick, setUserNick] = useState<string>();
   const [userFriends, setUserFriends] = useState<string[]>([]);
@@ -136,16 +147,10 @@ useEffect(() => {
 if (!userNick && user.email && user.displayName && !splashScreenActive) return (
   <Introduction userEmail={user.email} userName={user.displayName} setNickName={setUserNick}/>
 )
-/*
-if (!userFriends && user.email) return (
-  <FindFriends userEmail={user.email} setFriends={setUserFriends} friends={userFriends}/>
-)
-if (!userRooms) return (
-  <CreateRoom user={user} setRooms={setUserRooms} rooms={userRooms}/>
-)
-*/
-if (!userAvatar && !splashScreenActive) return (
-  <ChooseAvatar avatar={userAvatar} setAvatar={setUserAvatar}/>
+  if (!userAvatar && !splashScreenActive) return (
+  <AvatarDiv>
+      <ChooseAvatar avatar={userAvatar} setAvatar={setUserAvatar} />
+      </AvatarDiv>
 )
 
 
