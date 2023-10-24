@@ -6,8 +6,7 @@ import styled from 'styled-components';
 const IntroDiv = styled.div`
 display:flex;
 flex-direction:column;
-align-items:center;
-justify-content:center;
+
 border: 3px black solid;
 padding: 1rem;
 border-radius: 12px;
@@ -30,7 +29,8 @@ text-align: center;
 text-decoration: none;
 display: inline-block;
 font-size: 16px;
-margin: 4px 2px;
+margin-top:1rem;
+
 cursor: pointer;
 border-radius: 12px;
 z-index:14;
@@ -39,12 +39,18 @@ z-index:14;
 const StyledInput = styled.input`
 
     height:3rem;
-    width: 50%;
+    width: 100%;
     background-color: rgba(255,255,255,0.7);
-    margin: 0 1rem;
+    
     z-index:12;
     border-radius: 12px;
     text-align: center;
+`
+
+const StyledForm = styled.form`
+    display:flex;
+    flex-direction:column;
+    
 `
 
 export default function Introduction({userEmail, userName, setNickName} : {userEmail: string, userName: string, setNickName: any}): JSX.Element {
@@ -69,11 +75,11 @@ export default function Introduction({userEmail, userName, setNickName} : {userE
         <IntroDiv>
             <h1>Welcome to ChittyChat</h1>
             <h2>Hallo {userName}, please choose a Nickname:</h2>
-            <form onSubmit={(e)=> handleNewNickName(e, userEmail)}>
+            <StyledForm onSubmit={(e)=> handleNewNickName(e, userEmail)}>
                 <StyledInput type="text" placeholder="Nickname" name="nickname"/>
                 <p>{alertMessage}</p>
                 <StyledButton type="submit">OK</StyledButton>
-            </form>
+            </StyledForm>
         </IntroDiv>
     );
 }
