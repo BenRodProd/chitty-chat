@@ -1,7 +1,7 @@
-import { useEffect, useState } from "react";
-import getAllUserNicknames from "@/service/getAllUsers";
-import writeToFirestore from "@/service/writeUserInfo";
-import styled from "styled-components";
+import { useEffect, useState } from 'react';
+import getAllUserNicknames from '@/service/getAllUsers';
+import writeToFirestore from '@/service/writeUserInfo';
+import styled from 'styled-components';
 
 const FriendsDiv = styled.div`
   display: flex;
@@ -14,21 +14,21 @@ const FriendsDiv = styled.div`
   padding: 1rem;
   border-radius: 12px;
   z-index: 0;
-  gap:1rem;
-`
+  gap: 1rem;
+`;
 
 const FriendSelector = styled.p`
-cursor: pointer;
-border: 3px black solid;
-border-radius: 12px;
-padding: 0.5rem;
-background-color: lightgreen;
-`
+  cursor: pointer;
+  border: 3px black solid;
+  border-radius: 12px;
+  padding: 0.5rem;
+  background-color: lightgreen;
+`;
 
 export default function FindFriends({
   userEmail,
   setFriends,
-  friends,
+  friends
 }: {
   userEmail: string;
   setFriends: any;
@@ -43,28 +43,26 @@ export default function FindFriends({
   }, []);
 
   function handleAddFriend(user: any) {
-    if(!friends) {
-      setFriends([user.email])
-      writeToFirestore(userEmail, "friends", [user.email]);
+    if (!friends) {
+      setFriends([user.email]);
+      writeToFirestore(userEmail, 'friends', [user.email]);
     } else if (!friends.includes(user.email)) {
       // Ensure friends is an array
       const updatedFriends =
-        Array.isArray(friends) && friends.length > 0
-          ? [...friends, user.email]
-          : [user.email];
+        Array.isArray(friends) && friends.length > 0 ? [...friends, user.email] : [user.email];
 
       setFriends(updatedFriends);
-     
+
       // Optionally, you can also update the database here if needed
-      writeToFirestore(userEmail, "friends", updatedFriends);
+      writeToFirestore(userEmail, 'friends', updatedFriends);
     }
-   }
+  }
 
   return (
     <FriendsDiv>
       <h2>Füge einen Freund hinzu.</h2>
-      
-      {allUsers.map((user:any, index) => (
+
+      {allUsers.map((user: any, index) => (
         <FriendSelector onClick={() => handleAddFriend(user)} key={index}>
           {user.nick}
         </FriendSelector>
