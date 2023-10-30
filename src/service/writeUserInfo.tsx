@@ -1,7 +1,11 @@
 import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
 import { firestore } from './firebase'; // Import your Firestore instance
 
-export default async function writeToFirestore(username : string, typeOfData: string, dataToWrite: any) {
+export default async function writeToFirestore(
+  username: string,
+  typeOfData: string,
+  dataToWrite: any
+) {
   // Define the Firestore document reference
   const userDocRef = doc(firestore, 'user', username); // Assuming 'username' is the document ID
 

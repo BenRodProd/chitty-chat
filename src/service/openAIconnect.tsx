@@ -8,9 +8,8 @@ const openai = new OpenAI({
 export default async function AI() {
   const chatCompletion = await openai.chat.completions.create({
     messages: [{ role: 'user', content: 'Say this is a test' }],
-    model: 'gpt-3.5-turbo',
+    model: 'gpt-3.5-turbo'
   });
 
-  return (chatCompletion.choices);
+  return chatCompletion.choices;
 }
-
